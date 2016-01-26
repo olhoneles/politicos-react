@@ -1,0 +1,33 @@
+{
+  "name": "politicos-react",
+  "version": "0.1.0",
+  "description": "Politicos React Client",
+  "main": "index.js",
+  "repository": "git@github.com:olhoneles/politicos-react.git",
+  "scripts": {
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "build:lib": "rimraf lib && babel -d lib/ src/",
+    "build:dist": "rimraf dist && webpack --config webpack.config.dist.js --optimize-minimize",
+    "build": "npm run build:lib && npm run build:dist"
+  },
+  "author": "Marcelo Jorge Vieira <metal@alucinados.com>",
+  "license": "AGPL-1.0",
+  "devDependencies": {
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "rimraf": "^2.5.2",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0",
+    "websocket-extensions": "^0.1.1"
+  },
+  "dependencies": {
+    "axios": "^0.9.1",
+    "babel-preset-stage-1": "^6.1.18",
+    "lodash": "^3.10.1",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-select": "^1.0.0-beta11"
+  }
+}

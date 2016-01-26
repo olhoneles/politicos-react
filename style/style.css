@@ -1,0 +1,58 @@
+/*
+ * Copyright (c) 2016, Marcelo Jorge Vieira <metal@alucinados.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.search-bar {
+    margin: 20px;
+    text-align: center;
+}
+
+.search-bar input {
+    width: 75%;
+}
+
+.list-group-item {
+    cursor: pointer;
+}
+
+.list-group-item:hover {
+    background-color: #eee;
+}
+
+.politician-detail {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.politician-name {
+    font-size: 25px;
+    padding-bottom: 10px;
+}
+
+.politician-picture {
+    margin: auto;
+    display: block;
+}
+
+.details p {
+    margin: 0;
+}
+
+.filter-row {
+    padding: 10px 0;
+}
