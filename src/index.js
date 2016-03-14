@@ -37,6 +37,7 @@ class App extends Component {
       selectedPoliticalOffices: [],
       selectedEducations: [],
       selectedElections: [],
+      selectedPoliticians: [],
       query: ''
     };
 
@@ -51,17 +52,13 @@ class App extends Component {
     });
   }
 
-  // FIXME: Remove it
-  politicianSearch(term) {
-    axios.get(this.URL + "/politicians/?name__istartswith=" + term).then((result) => {
-      this.setState({
-        politicians: result.data.objects,
-      });
-    });
-  }
-
   // FIXME
   onChangeQuery() {
+
+    const politicians = this.state.selectedPoliticians.map((item) => {
+        return 'politician__name__in=' + item.value;
+    });
+
     const elections = this.state.selectedElections.map((item) => {
       return 'election_round__election__year__in=' + item.value;
     });
@@ -78,7 +75,7 @@ class App extends Component {
       return 'political_office__slug__in=' + item.value;
     });
 
-    let query = [].concat.call(elections, educations, political_parties, political_offices);
+    let query = [].concat.call(politicians, elections, educations, political_parties, political_offices);
 
     this.setState({query});
 
@@ -155,6 +152,22 @@ class App extends Component {
     this.setState({selectedElections});
   }
 
+  // Politicians
+  searchPoliticians(term) {
+    /// FIXME: Fazer decode do term ele chega com %20 no lugar do espaço
+    return axios.get(this.URL + "/politicians/?name__istartswith=" + term).then((response) => {
+      return response.data
+    }).then((json) => {
+      const options = json.objects.map((item) => {
+        return {"label": item.name, "value": item.name};
+      });
+      return {options};
+    });
+  }
+  onChangePoliticians(selectedPoliticians) {
+    this.setState({selectedPoliticians});
+  }
+
   render() {
 
     const politicianSearch = _.debounce((term) => {this.politicianSearch(term)}, 300);
@@ -197,14 +210,21 @@ class App extends Component {
               value={this.state.selectedElections} />
           </div>
         </div>
-
+        <div className="filter-row row">
+          <div className="col-md-12">
+            <Multiselect
+              label="Políticos"
+              placeholder="Escolha uma ou vários políticos..."
+              loadOptions={this.searchPoliticians.bind(this)}
+              onChange={this.onChangePoliticians.bind(this)}
+              value={this.state.selectedPoliticians} />
+          </div>
+        </div>
         <div className="filter-row row">
           <div className="col-md-12">
             <button className="btn btn-primary" onClick={this.onChangeQuery.bind(this)}>Filtrar</button>
           </div>
         </div>
-
-        <SearchBar onSearchTermChange={politicianSearch} />
 
         <PoliticianDetail politician={this.state.selectedPolitician} />
 
