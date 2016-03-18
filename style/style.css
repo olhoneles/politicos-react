@@ -15,6 +15,45 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+.main {
+    padding: 40px 0;
+}
+
+.navbar-default {
+    background-color: #428bca;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: #fff;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover {
+    background-color: #428bca;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand a:hover,
+.navbar-default .navbar-brand a {
+    color: #fff;
+}
+
+#navbar a {
+    color: #fff;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+#navbar a:hover {
+    text-decoration: underline;
+}
+
 .search-bar {
     margin: 20px;
     text-align: center;

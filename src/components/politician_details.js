@@ -33,7 +33,7 @@ const PoliticianDetail = ({politician}) => {
 
   let picture = ''
   if (!politician.picture) {
-    picture = <div><span class="glyphicon glyphicon-search" aria-hidden="true"></span>AAA</div>;
+    picture = <div><span className="glyphicon glyphicon-user" aria-hidden="true"></span>Sem Foto</div>;
   } else {
     picture = <img src={politician.picture} className="politician-picture" />;
   }

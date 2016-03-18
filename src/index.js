@@ -173,9 +173,9 @@ class App extends Component {
     const politicianSearch = _.debounce((term) => {this.politicianSearch(term)}, 300);
 
     return (
-      <div>
+      <div className="container">
         <div className="filter-row row">
-          <div className="col-md-6">
+          <div className="col-lg-6">
             <Multiselect
               label="Partidos"
               placeholder="Escolha um ou vários partidos..."
@@ -183,7 +183,7 @@ class App extends Component {
               onChange={this.onChangePoliticalParties.bind(this)}
               value={this.state.selectedPoliticalParties} />
           </div>
-          <div className="col-md-6">
+          <div className="col-lg-6">
             <Multiselect
               label="Cargos"
               placeholder="Escolha um ou vários cargos..."
@@ -193,7 +193,7 @@ class App extends Component {
           </div>
         </div>
         <div className="filter-row row">
-          <div className="col-md-6">
+          <div className="col-lg-6">
             <Multiselect
               label="Escolaridades"
               placeholder="Escolha uma ou várias escolaridades..."
@@ -201,7 +201,7 @@ class App extends Component {
               onChange={this.onChangeEducations.bind(this)}
               value={this.state.selectedEducations} />
           </div>
-          <div className="col-md-6">
+          <div className="col-lg-6">
             <Multiselect
               label="Eleições"
               placeholder="Escolha uma ou várias eleições..."
@@ -237,4 +237,4 @@ class App extends Component {
   }
 }
 
-ReactDOM.render(<App />, document.querySelector('.container'));
+ReactDOM.render(<App />, document.querySelector('.main'));
