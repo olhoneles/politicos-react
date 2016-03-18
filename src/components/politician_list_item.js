@@ -16,17 +16,13 @@
  */
 
 import React from 'react';
+import PoliticianDetail from './politician_details';
 
-const PoliticianListItem = ({politician, onPoliticianSelect}) => {
+const PoliticianListItem = ({politician}) => {
   return (
-    <li onClick={() => onPoliticianSelect(politician)} className="list-group-item">
-      <div className="politician-list media">
-        <div className="media-left">
-          <img width="30" className="media-object" src={politician.picture} />
-        </div>
-        <div className="media-body">
-          <div className="media-heading">{politician.name}</div>
-        </div>
+    <li className="list-group-item">
+      <div className="politician-list">
+         <PoliticianDetail politician={politician} />
       </div>
     </li>
   );

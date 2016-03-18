@@ -39,9 +39,9 @@ const PoliticianDetail = ({politician}) => {
   }
 
   return (
-    <div className="politician-detail col-md-8">
-      <div className="col-md-4">{picture}</div>
-      <div className="col-md-8">
+    <div className="">
+      <div className="col-lg-4">{picture}</div>
+      <div className="col-lg-8">
         <div className="politician-name">{politician.name}</div>
         <div className="details">
           <p>Sexo: {politician.gender == 'M' ? 'Masculino' : 'Feminino'}</p>

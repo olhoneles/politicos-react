@@ -29,7 +29,7 @@ const PoliticianList = (props) => {
   });
 
   return (
-    <ul className="col-md-4 list-group">
+    <ul className="col-lg-12 list-group politicians">
       {politicianItems}
     </ul>
   );

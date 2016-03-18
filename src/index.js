@@ -22,7 +22,6 @@ import ReactDOM from 'react-dom';
 
 import SearchBar from './components/search_bar';
 import PoliticianList from './components/politician_list';
-import PoliticianDetail from './components/politician_details';
 import Multiselect from './components/Multiselect';
 
 
@@ -32,7 +31,6 @@ class App extends Component {
 
     this.state = {
       politicians: [],
-      selectedPolitician: [],
       selectedPoliticalParties: [],
       selectedPoliticalOffices: [],
       selectedEducations: [],
@@ -47,7 +45,6 @@ class App extends Component {
     axios.get(this.URL + "/politicians/").then((result) => {
       this.setState({
         politicians: result.data.objects,
-        selectedPolitician: result.data.objects[0]
       });
     });
   }
@@ -226,11 +223,7 @@ class App extends Component {
           </div>
         </div>
 
-        <PoliticianDetail politician={this.state.selectedPolitician} />
-
-        <PoliticianList
-          onPoliticianSelect={selectedPolitician => this.setState({selectedPolitician})}
-          politicians={this.state.politicians} />
+        <PoliticianList politicians={this.state.politicians} />
 
       </div>
     );

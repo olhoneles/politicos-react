@@ -63,12 +63,16 @@
     width: 75%;
 }
 
-.list-group-item {
-    cursor: pointer;
+.politicians {
+    margin-top: 30px;
 }
 
 .list-group-item:hover {
     background-color: #eee;
+}
+
+.politician-list {
+    overflow: hidden;
 }
 
 .politician-detail {
