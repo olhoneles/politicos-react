@@ -52,7 +52,7 @@ const PoliticianDetail = ({politician}) => {
           <p>Escolaridade: {politician.education.name}</p>
           <p>Data de nascimento: {politician.date_of_birth}</p>
           <p>Nacionalidade: {politician.nationality.name}</p>
-          <p>Naturalidade: {politician.place_of_birth}/{politician.state.name}</p>
+          <p>Naturalidade: {politician.place_of_birth}/{politician.state ? politician.state.name : null}</p>
           <p>Nomes Alternativos: {alternativeNames}</p>
           <p>Cor/Raça: {politician.ethnicity ? politician.ethnicity.name : null}</p>
           <p>Email: {politician.email}</p>
