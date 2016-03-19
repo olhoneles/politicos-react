@@ -35,6 +35,12 @@ class App extends Component {
       selectedEducations: [],
       selectedElections: [],
       selectedPoliticians: [],
+      selectedCities: [],
+      selectedStates: [],
+      selectedElected: [],
+      selectedGender: [],
+      selectedOccupations: [],
+      selectedMaritalStatus: [],
       query: ''
     };
 
@@ -64,6 +70,12 @@ class App extends Component {
            selectedEducations={this.state.selectedEducations}
            selectedElections={this.state.selectedElections}
            selectedPoliticians={this.state.selectedPoliticians}
+           selectedCities={this.state.selectedCities}
+           selectedStates={this.state.selectedStates}
+           selectedElected={this.state.selectedElected}
+           selectedGender={this.state.selectedGender}
+           selectedOccupations={this.state.selectedOccupations}
+           selectedMaritalStatus={this.state.selectedMaritalStatus}
            query={this.state.query} />
 
         <PoliticianList politicians={this.state.politicians} />
