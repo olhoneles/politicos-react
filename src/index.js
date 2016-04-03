@@ -57,11 +57,74 @@ class App extends Component {
 
   }
 
+  // FIXME
+  onChangeQuery() {
+    const politicians = this.state.selectedPoliticians.map((item) => {
+        return 'politician__name__in=' + item.value;
+    });
+
+    const elections = this.state.selectedElections.map((item) => {
+      return 'election_round__election__year__in=' + item.value;
+    });
+
+    const educations = this.state.selectedEducations.map((item) => {
+      return 'politician__education__name__in=' + item.value;
+    });
+
+    const political_parties = this.state.selectedPoliticalParties.map((item) => {
+      return 'politician__political_parties__political_party__siglum__in=' + item.value;
+    });
+
+    const political_offices = this.state.selectedPoliticalOffices.map((item) => {
+      return 'political_office__slug__in=' + item.value;
+    });
+
+    const cities = this.state.selectedCities.map((item) => {
+      return 'city__name__in=' + item.value;
+    });
+
+    const states = this.state.selectedStates.map((item) => {
+      return 'state__slug__in=' + item.value;
+    });
+
+    const elected = this.state.selectedElected.map((item) => {
+      return 'elected__in=' + item.value;
+    });
+
+    const gender = this.state.selectedGender.map((item) => {
+      return 'politician__gender__in=' + item.value;
+    });
+
+    const occupations = this.state.selectedOccupations.map((item) => {
+      return 'politician__occupation__slug__in=' + item.value;
+    });
+
+    const marital_status = this.state.selectedMaritalStatus.map((item) => {
+      return 'politician__marital_status__slug__in=' + item.value;
+    });
+
+    let query = [].concat.call(
+      politicians, elections, educations, political_parties, political_offices,
+      cities, states, elected, gender, occupations, marital_status
+    );
+
+    this.onChange({query});
+
+    axios.get(this.URL + "/candidacies/?" + query.join('&')).then((result) => {
+      this.onChange({
+        politicians: result.data.objects.map((item) => {
+          return item.politician;
+        })
+      });
+    });
+  }
+
   render() {
 
     return (
       <div className="container">
         <Filters
+           onChangeQuery={this.onChangeQuery.bind(this)}
            onChange={this.onChange.bind(this)}
            url={this.URL}
            politicians={this.state.politicians}
