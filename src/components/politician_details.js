@@ -45,7 +45,6 @@ const PoliticianDetail = ({politician}) => {
         <div className="politician-name">{politician.name}</div>
         <div className="details">
           <p>Sexo: {politician.gender == "M" ? "Masculino" : "Feminino"}</p>
-          <p>Nacionalidade: {politician.nationality.name}</p>
           <p>Partido: {politicalParties}</p>
           <p>Estado civil: {politician.marital_status.name}</p>
           <p>Ocupação: {politician.occupation.name}</p>
