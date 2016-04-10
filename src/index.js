@@ -15,13 +15,12 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import axios from 'axios'
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
+import axios from "axios";
+import React, {Component} from "react";
+import ReactDOM from "react-dom";
 
-import SearchBar from './components/search_bar';
-import PoliticianList from './components/politician_list';
-import Filters from './components/filters';
+import PoliticianList from "./components/politician_list";
+import Filters from "./components/filters";
 
 
 class App extends Component {
@@ -41,17 +40,17 @@ class App extends Component {
       selectedGender: [],
       selectedOccupations: [],
       selectedMaritalStatus: [],
-      query: ''
+      query: ""
     };
 
-    this.URL = "http://politicos.olhoneles.org/api/v0"
+    this.URL = "http://politicos.olhoneles.org/api/v0";
 
     this.onChange = (state) => this.setState(state);
 
     // FIXME: Iniial query
     axios.get(this.URL + "/politicians/").then((result) => {
       this.onChange({
-        politicians: result.data.objects,
+        politicians: result.data.objects
       });
     });
 
@@ -60,47 +59,47 @@ class App extends Component {
   // FIXME
   onChangeQuery() {
     const politicians = this.state.selectedPoliticians.map((item) => {
-        return 'politician__name__in=' + item.value;
+      return "politician__name__in=" + item.value;
     });
 
     const elections = this.state.selectedElections.map((item) => {
-      return 'election_round__election__year__in=' + item.value;
+      return "election_round__election__year__in=" + item.value;
     });
 
     const educations = this.state.selectedEducations.map((item) => {
-      return 'politician__education__name__in=' + item.value;
+      return "politician__education__name__in=" + item.value;
     });
 
     const political_parties = this.state.selectedPoliticalParties.map((item) => {
-      return 'politician__political_parties__political_party__siglum__in=' + item.value;
+      return "politician__political_parties__political_party__siglum__in=" + item.value;
     });
 
     const political_offices = this.state.selectedPoliticalOffices.map((item) => {
-      return 'political_office__slug__in=' + item.value;
+      return "political_office__slug__in=" + item.value;
     });
 
     const cities = this.state.selectedCities.map((item) => {
-      return 'city__name__in=' + item.value;
+      return "city__name__in=" + item.value;
     });
 
     const states = this.state.selectedStates.map((item) => {
-      return 'state__slug__in=' + item.value;
+      return "state__slug__in=" + item.value;
     });
 
     const elected = this.state.selectedElected.map((item) => {
-      return 'elected__in=' + item.value;
+      return "elected__in=" + item.value;
     });
 
     const gender = this.state.selectedGender.map((item) => {
-      return 'politician__gender__in=' + item.value;
+      return "politician__gender__in=" + item.value;
     });
 
     const occupations = this.state.selectedOccupations.map((item) => {
-      return 'politician__occupation__slug__in=' + item.value;
+      return "politician__occupation__slug__in=" + item.value;
     });
 
     const marital_status = this.state.selectedMaritalStatus.map((item) => {
-      return 'politician__marital_status__slug__in=' + item.value;
+      return "politician__marital_status__slug__in=" + item.value;
     });
 
     let query = [].concat.call(
@@ -110,7 +109,7 @@ class App extends Component {
 
     this.onChange({query});
 
-    axios.get(this.URL + "/candidacies/?" + query.join('&')).then((result) => {
+    axios.get(this.URL + "/candidacies/?" + query.join("&")).then((result) => {
       this.onChange({
         politicians: result.data.objects.map((item) => {
           return item.politician;
@@ -148,4 +147,4 @@ class App extends Component {
   }
 }
 
-ReactDOM.render(<App />, document.querySelector('.main'));
+ReactDOM.render(<App />, document.querySelector(".main"));

@@ -15,10 +15,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import _ from 'lodash'
-import axios from 'axios'
-import React, {Component} from 'react';
-import Multiselect from './Multiselect';
+import axios from "axios";
+import React, {Component} from "react";
+import Multiselect from "./Multiselect";
 
 
 class Filters extends Component {
@@ -28,7 +27,7 @@ class Filters extends Component {
 
   getOptions(url, func) {
     return axios.get(this.props.url + url).then((response) => {
-      return response.data
+      return response.data;
     }).then((json) => {
       const options = json.objects.map(func);
       return {options};
@@ -36,48 +35,48 @@ class Filters extends Component {
   }
 
   getOptionsCallback = (input, callback, opts) =>  {
-    setTimeout(() => {callback(null, {options: opts, complete: true})}, 500);
+    setTimeout(() => {callback(null, {options: opts, complete: true});}, 500);
   }
 
   // Political Parties
   getPoliticalParties() {
-    const func = (item) => {return {"label": item.siglum + " (" + item.name + ")", "value": item.siglum}};
+    const func = (item) => {return {"label": item.siglum + " (" + item.name + ")", "value": item.siglum};};
     return this.getOptions("/political-parties/", func);
   }
 
   // Political Offices
   getPoliticalOffices() {
-    const func = (item) => {return {"label": item.name, "value": item.slug}};
+    const func = (item) => {return {"label": item.name, "value": item.slug};};
     return this.getOptions("/political-offices/", func);
   }
 
   // Educations
   getEducations() {
-    const func = (item) => {return {"label": item.name, "value": item.name}};
+    const func = (item) => {return {"label": item.name, "value": item.name};};
     return this.getOptions("/educations/", func);
   }
 
   // Elections
   getElections() {
-    const func = (item) => {return {"label": item.year, "value": item.year}};
+    const func = (item) => {return {"label": item.year, "value": item.year};};
     return this.getOptions("/elections/", func);
   }
 
   // Politicians
   searchPoliticians(term) {
-    const func = (item) => {return {"label": item.name, "value": item.name}};
+    const func = (item) => {return {"label": item.name, "value": item.name};};
     return this.getOptions("/politicians/?name__istartswith=" + term, func);
   }
 
   // Cities
   getCities(term) {
-    const func = (item) => {return {"label": item.name, "value": item.name}};
+    const func = (item) => {return {"label": item.name, "value": item.name};};
     return this.getOptions("/cities/?name__istartswith=" + term, func);
   }
 
   // States
   getStates() {
-    const func = (item) => {return {"label": item.name, "value": item.slug}};
+    const func = (item) => {return {"label": item.name, "value": item.slug};};
     return this.getOptions("/states/", func);
   }
 
@@ -86,34 +85,32 @@ class Filters extends Component {
     const options = [
       {"label": "Eleito", "value": 1},
       {"label": "Não Eleito", "value": 0}
-    ]
+    ];
     return this.getOptionsCallback(input, callback, options);
   }
 
   // Gender
   getGender = (input, callback) =>  {
     const options = [
-      {'label': "Masculino", "value": "M"},
-      {'label': "Feminino", "value": "F"}
+      {"'label": "Masculino", "value": "M"},
+      {"label": "Feminino", "value": "F"}
     ];
     return this.getOptionsCallback(input, callback, options);
   }
 
   // Occupations
   getOccupations() {
-    const func = (item) => {return {"label": item.name, "value": item.slug}};
+    const func = (item) => {return {"label": item.name, "value": item.slug};};
     return this.getOptions("/occupations/", func);
   }
 
   // MaritalStatus
   getMaritalStatus() {
-    const func = (item) => {return {"label": item.name, "value": item.slug}};
+    const func = (item) => {return {"label": item.name, "value": item.slug};};
     return this.getOptions("/marital-status/", func);
   }
 
   render() {
-    const searchPoliticians = _.debounce((term) => {this.searchPoliticians(term)}, 300);
-
     return (
       <div>
          <div className="filter-row row">

@@ -15,7 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React from "react";
 
 const PoliticianDetail = ({politician}) => {
 
@@ -31,7 +31,7 @@ const PoliticianDetail = ({politician}) => {
     return item.political_party.siglum;
   });
 
-  let picture = ''
+  let picture = "";
   if (!politician.picture) {
     picture = <div><span className="glyphicon glyphicon-user" aria-hidden="true"></span>Sem Foto</div>;
   } else {
@@ -44,7 +44,7 @@ const PoliticianDetail = ({politician}) => {
       <div className="col-lg-8">
         <div className="politician-name">{politician.name}</div>
         <div className="details">
-          <p>Sexo: {politician.gender == 'M' ? 'Masculino' : 'Feminino'}</p>
+          <p>Sexo: {politician.gender == "M" ? "Masculino" : "Feminino"}</p>
           <p>Nacionalidade: {politician.nationality.name}</p>
           <p>Partido: {politicalParties}</p>
           <p>Estado civil: {politician.marital_status.name}</p>

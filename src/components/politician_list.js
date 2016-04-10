@@ -15,8 +15,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-import PoliticianListItem from './politician_list_item';
+import React from "react";
+import PoliticianListItem from "./politician_list_item";
 
 const PoliticianList = (props) => {
   const politicianItems = props.politicians.map((politician) => {
