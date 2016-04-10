@@ -29,7 +29,7 @@ const PoliticianDetail = ({politician}) => {
 
   const politicalParties = politician.political_parties.map((item) => {
     return item.political_party.siglum;
-  });
+  }).join(", ");
 
   let picture = "";
   if (!politician.picture) {
