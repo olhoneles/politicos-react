@@ -64,7 +64,7 @@ class Filters extends Component {
   }
 
   // Politicians
-  searchPoliticians(term) {
+  getPoliticians(term) {
     const func = (item) => {return {"label": item.name, "value": item.name};};
     return this.getOptions("/politicians/?name__istartswith=" + term, func);
   }
@@ -119,7 +119,7 @@ class Filters extends Component {
              <Multiselect
                label="Políticos"
                placeholder="Escolha uma ou vários políticos..."
-               loadOptions={debounce(this.searchPoliticians.bind(this), 500)}
+               loadOptions={debounce(this.getPoliticians.bind(this), 500)}
                onChange={(selectedPoliticians) => this.props.onChange({selectedPoliticians})}
                value={this.props.selectedPoliticians} />
            </div>
