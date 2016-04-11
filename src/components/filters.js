@@ -16,6 +16,7 @@
  */
 
 import axios from "axios";
+import debounce from "es6-promise-debounce";
 import React, {Component} from "react";
 import Multiselect from "./Multiselect";
 
@@ -118,7 +119,7 @@ class Filters extends Component {
              <Multiselect
                label="Políticos"
                placeholder="Escolha uma ou vários políticos..."
-               loadOptions={this.searchPoliticians.bind(this)}
+               loadOptions={debounce(this.searchPoliticians.bind(this), 500)}
                onChange={(selectedPoliticians) => this.props.onChange({selectedPoliticians})}
                value={this.props.selectedPoliticians} />
            </div>
@@ -172,7 +173,7 @@ class Filters extends Component {
              <Multiselect
                label="Cidades"
                placeholder="Escolha uma ou várias cidades..."
-               loadOptions={this.getCities.bind(this)}
+               loadOptions={debounce(this.getCities.bind(this), 500)}
                onChange={(selectedCities) => this.props.onChange({selectedCities})}
                value={this.props.selectedCities} />
            </div>
@@ -200,7 +201,7 @@ class Filters extends Component {
               <Multiselect
                 label="Profissões"
                 placeholder="Escolha uma ou mais profissões..."
-                loadOptions={this.getOccupations.bind(this)}
+                loadOptions={debounce(this.getOccupations.bind(this), 500)}
                 onChange={(selectedOccupations) => this.props.onChange({selectedOccupations})}
                 value={this.props.selectedOccupations} />
             </div>
