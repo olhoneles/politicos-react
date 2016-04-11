@@ -99,9 +99,9 @@ class Filters extends Component {
   }
 
   // Occupations
-  getOccupations() {
+  getOccupations(term) {
     const func = (item) => {return {"label": item.name, "value": item.slug};};
-    return this.getOptions("/occupations/", func);
+    return this.getOptions("/occupations/?name__istartswith=" + term, func);
   }
 
   // MaritalStatus
