@@ -66,13 +66,15 @@ class Filters extends Component {
   // Politicians
   getPoliticians(term) {
     const func = (item) => {return {"label": item.name, "value": item.name};};
-    return this.getOptions("/politicians/?name__istartswith=" + term, func);
+    const filter = (term != "") ? "?name__istartswith=" + term : "";
+    return this.getOptions("/politicians/" + filter, func);
   }
 
   // Cities
   getCities(term) {
     const func = (item) => {return {"label": item.name, "value": item.name};};
-    return this.getOptions("/cities/?name__istartswith=" + term, func);
+    const filter = (term != "") ? "?name__istartswith=" + term : "";
+    return this.getOptions("/cities/" + filter, func);
   }
 
   // States
@@ -102,7 +104,8 @@ class Filters extends Component {
   // Occupations
   getOccupations(term) {
     const func = (item) => {return {"label": item.name, "value": item.slug};};
-    return this.getOptions("/occupations/?name__istartswith=" + term, func);
+    const filter = (term != "") ? "?name__istartswith=" + term : "";
+    return this.getOptions("/occupations/" + filter, func);
   }
 
   // MaritalStatus
