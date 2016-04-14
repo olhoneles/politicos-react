@@ -83,6 +83,18 @@
     display: block;
 }
 
+.candidacies .dl-horizontal dt {
+    width: 40px;
+}
+
+.candidacies .dl-horizontal dd {
+    margin-left: 55px;
+}
+
+.candidacies p {
+    margin: 0;
+}
+
 .details p {
     margin: 0;
 }

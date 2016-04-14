@@ -15,51 +15,75 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React from "react";
+import React, {Component} from "react";
+import PoliticianCandidacies from "./politician_candidacies";
 
-const PoliticianDetail = ({politician}) => {
 
-  if (!politician || politician.length <= 0) {
-    return <div>Loading...</div>;
+class PoliticianDetail extends Component {
+
+  constructor(props) {
+    super(props);
+    this.politician = this.props.politician;
   }
 
-  const alternativeNames = politician.alternative_names.map((item) => {
-    return item.name;
-  });
+  render() {
 
-  const politicalParties = politician.political_parties.map((item) => {
-    return item.political_party.siglum;
-  }).join(", ");
+    if (!this.politician || this.politician.length <= 0) {
+      return <div>Loading...</div>;
+    }
 
-  let picture = "";
-  if (!politician.picture) {
-    picture = <div><span className="glyphicon glyphicon-user" aria-hidden="true"></span>Sem Foto</div>;
-  } else {
-    picture = <img src={politician.picture} className="politician-picture" />;
-  }
+    const alternativeNames = this.politician.alternative_names.map((item) => {
+      return item.name;
+    });
 
-  return (
-    <div className="">
-      <div className="col-lg-4">{picture}</div>
-      <div className="col-lg-8">
-        <div className="politician-name">{politician.name}</div>
-        <div className="details">
-          <p>Sexo: {politician.gender == "M" ? "Masculino" : "Feminino"}</p>
-          <p>Partido: {politicalParties}</p>
-          <p>Estado civil: {politician.marital_status.name}</p>
-          <p>Ocupação: {politician.occupation.name}</p>
-          <p>Escolaridade: {politician.education.name}</p>
-          <p>Data de nascimento: {politician.date_of_birth}</p>
-          <p>Nacionalidade: {politician.nationality.name}</p>
-          <p>Naturalidade: {politician.place_of_birth}/{politician.state ? politician.state.name : null}</p>
-          <p>Nomes Alternativos: {alternativeNames}</p>
-          <p>Cor/Raça: {politician.ethnicity ? politician.ethnicity.name : null}</p>
-          <p>Email: {politician.email}</p>
-          <p>Website: {politician.website}</p>
+    const politicalParties = this.politician.political_parties.map((item) => {
+      return item.political_party.siglum;
+    }).join(", ");
+
+    let picture = "";
+    if (!this.politician.picture) {
+      picture = <div><span className="glyphicon glyphicon-user" aria-hidden="true"></span>Sem Foto</div>;
+    } else {
+      picture = <img src={this.politician.picture} className="politician-picture" />;
+    }
+
+    let alternative_name = "";
+    if (this.politician.name != this.politician.alternative_names[0].name) {
+      alternative_name = this.politician.alternative_names[0].name;
+    }
+
+    return (
+      <div className="">
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="politician-name">{alternative_name} ({this.politician.name})</div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-3">{picture}</div>
+          <div className="col-lg-5">
+            <div className="details">
+              <p>Sexo: {this.politician.gender == "M" ? "Masculino" : "Feminino"}</p>
+              <p>Partido: {politicalParties}</p>
+              <p>Estado civil: {this.politician.marital_status.name}</p>
+              <p>Ocupação: {this.politician.occupation.name}</p>
+              <p>Escolaridade: {this.politician.education.name}</p>
+              <p>Data de nascimento: {this.politician.date_of_birth}</p>
+              <p>Nacionalidade: {this.politician.nationality.name}</p>
+              <p>Naturalidade: {this.politician.place_of_birth}/{this.politician.state ? this.politician.state.name : null}</p>
+              <p>Nomes Alternativos: {alternativeNames}</p>
+              <p>Cor/Raça: {this.politician.ethnicity ? this.politician.ethnicity.name : null}</p>
+              <p>Email: {this.politician.email}</p>
+              <p>Website: {this.politician.website}</p>
+            </div>
+          </div>
+          <div className="col-lg-4">
+            <PoliticianCandidacies data={this.politician.candidacies} />
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default PoliticianDetail;
