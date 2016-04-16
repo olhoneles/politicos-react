@@ -35,7 +35,7 @@ class Filters extends Component {
     });
   }
 
-  getOptionsCallback = (input, callback, opts) =>  {
+  getOptionsCallback(input, callback, opts) {
     setTimeout(() => {callback(null, {options: opts, complete: true});}, 500);
   }
 
@@ -84,7 +84,7 @@ class Filters extends Component {
   }
 
   // Elected
-  getElected = (input, callback) =>  {
+  getElected(input, callback) {
     const options = [
       {"label": "Eleito", "value": 1},
       {"label": "Não Eleito", "value": 0}
@@ -93,7 +93,7 @@ class Filters extends Component {
   }
 
   // Gender
-  getGender = (input, callback) =>  {
+  getGender(input, callback) {
     const options = [
       {"'label": "Masculino", "value": "M"},
       {"label": "Feminino", "value": "F"}
@@ -186,7 +186,7 @@ class Filters extends Component {
               <Multiselect
                 label="Eleito"
                 placeholder="Filtre quem foi eleito ou não..."
-                loadOptions={this.getElected}
+                loadOptions={this.getElected.bind(this)}
                 onChange={(selectedElected) => this.props.onChange({selectedElected})}
                 value={this.props.selectedElected} />
             </div>
@@ -194,7 +194,7 @@ class Filters extends Component {
               <Multiselect
                 label="Sexo"
                 placeholder="Escolha o sexo..."
-                loadOptions={this.getGender}
+                loadOptions={this.getGender.bind(this)}
                 onChange={(selectedGender) => this.props.onChange({selectedGender})}
                 value={this.props.selectedGender} />
             </div>
