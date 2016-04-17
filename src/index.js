@@ -21,11 +21,16 @@ import ReactDOM from "react-dom";
 
 import PoliticianList from "./components/politician_list";
 import Filters from "./components/filters";
+import Pagination from "./components/pagination";
 
 
 class App extends Component {
   constructor(props) {
     super(props);
+    
+    this.pages = 10;
+    this.initialPage = 0;
+    this.initialPagination = {limit:this.pages,offset:this.initialPage};
 
     this.state = {
       politicians: [],
@@ -40,19 +45,13 @@ class App extends Component {
       selectedGender: [],
       selectedOccupations: [],
       selectedMaritalStatus: [],
+      pagination: this.initialPagination,
       query: ""
     };
 
     this.URL = "http://politicos.olhoneles.org/api/v0";
 
     this.onChange = (state) => this.setState(state);
-
-    // FIXME: Iniial query
-    axios.get(this.URL + "/politicians/").then((result) => {
-      this.onChange({
-        politicians: result.data.objects
-      });
-    });
 
   }
 
@@ -101,19 +100,45 @@ class App extends Component {
     const marital_status = this.state.selectedMaritalStatus.map((item) => {
       return "marital_status__slug__in=" + item.value;
     });
+    
+    let getPagination = () => {
+      let pag;
+      if(!this.isPageChanging){
+        this.onChange({pagination:this.initialPagination});
+        pag = this.initialPagination;
+      }else{
+        pag = this.state.pagination;
+      }
+      let qsItems = [];
+      qsItems.push("offset=" + pag.offset);
+      qsItems.push("limit=" + pag.limit);
+      return qsItems;
+    };
 
     let query = [].concat.call(
       politicians, elections, educations, political_parties, political_offices,
-      cities, states, elected, gender, occupations, marital_status
+      cities, states, elected, gender, occupations, marital_status, getPagination()
     );
 
     this.onChange({query});
 
     axios.get(this.URL + "/politicians/?" + query.join("&")).then((result) => {
       this.onChange({
-        politicians: result.data.objects.map((item) => {return item;})
+        politicians: result.data.objects.map((item) => {return item;}),
+        pagination: result.data.meta
       });
     });
+  }
+  
+  componentDidMount(){
+    this.onChangeQuery();
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if (prevState.pagination.offset != this.state.pagination.offset && this.isPageChanging){
+      this.onChangeQuery();
+      this.isPageChanging = false;
+    }
   }
 
   render() {
@@ -137,6 +162,14 @@ class App extends Component {
            selectedOccupations={this.state.selectedOccupations}
            selectedMaritalStatus={this.state.selectedMaritalStatus}
            query={this.state.query} />
+           
+        <Pagination
+            pages={this.pages}
+            pagination={this.state.pagination}
+            onPageClick={(pagination) => {
+              this.isPageChanging = true;
+              this.onChange({pagination});
+            }}/>   
 
         <PoliticianList politicians={this.state.politicians} />
 
