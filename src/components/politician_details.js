@@ -47,9 +47,11 @@ class PoliticianDetail extends Component {
       picture = <img src={this.politician.picture} className="politician-picture" />;
     }
 
-    let alternative_name = "";
-    if (this.politician.name != this.politician.alternative_names[0].name) {
-      alternative_name = this.politician.alternative_names[0].name;
+    let politicianName;
+    if (this.politician.alternative_names && this.politician.name != this.politician.alternative_names[0].name) {
+      politicianName = `${this.politician.alternative_names[0].name} (${this.politician.name})`;
+    } else {
+      politicianName = this.politician.name;
     }
 
     let gender;
@@ -65,7 +67,7 @@ class PoliticianDetail extends Component {
       <div className="">
         <div className="row">
           <div className="col-lg-12">
-            <div className="politician-name">{alternative_name} ({this.politician.name})</div>
+            <div className="politician-name">{politicianName}</div>
           </div>
         </div>
         <div className="row">
