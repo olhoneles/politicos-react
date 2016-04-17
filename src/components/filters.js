@@ -95,7 +95,7 @@ class Filters extends Component {
   // Gender
   getGender(input, callback) {
     const options = [
-      {"'label": "Masculino", "value": "M"},
+      {"label": "Masculino", "value": "M"},
       {"label": "Feminino", "value": "F"}
     ];
     return this.getOptionsCallback(input, callback, options);
