@@ -52,6 +52,15 @@ class PoliticianDetail extends Component {
       alternative_name = this.politician.alternative_names[0].name;
     }
 
+    let gender;
+    if (this.politician.gender == "M") {
+      gender = "Masculino";
+    } else if (this.politician.gender == "F") {
+      gender = "Feminino";
+    } else {
+      gender = "Não informado";
+    }
+
     return (
       <div className="">
         <div className="row">
@@ -63,7 +72,7 @@ class PoliticianDetail extends Component {
           <div className="col-lg-3">{picture}</div>
           <div className="col-lg-5">
             <div className="details">
-              <p>Sexo: {this.politician.gender == "M" ? "Masculino" : "Feminino"}</p>
+              <p>Sexo: {gender}</p>
               <p>Partido: {politicalParties}</p>
               <p>Estado civil: {this.politician.marital_status.name}</p>
               <p>Ocupação: {this.politician.occupation.name}</p>
