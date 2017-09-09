@@ -16,7 +16,8 @@
  */
 
 import React, { Component } from 'react'
-import PoliticianCandidacies from './politician_candidacies'
+
+import PoliticianCandidacies from './PoliticianCandidacies'
 
 class PoliticianDetail extends Component {
   constructor(props) {

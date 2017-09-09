@@ -16,7 +16,7 @@
  */
 
 import React from 'react'
-import PoliticianDetail from './politician_details'
+import PoliticianDetail from './PoliticianDetail'
 
 const PoliticianListItem = ({ politician }) => {
   return (

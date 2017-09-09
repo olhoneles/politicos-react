@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, Marcelo Jorge Vieira <metal@alucinados.com>
+ * Copyright (c) 2017, Marcelo Jorge Vieira <metal@alucinados.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,36 +15,27 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React from 'react'
-import Select from 'react-select'
+export const POLITICIANS_CHANGE = 'POLITICIANS_CHANGE'
 
-export const getOptionsCallback = (input, callback, opts) => {
-  setTimeout(() => {
-    callback(null, { options: opts, complete: true })
-  }, 500)
+// Action creators
+export const changePoliticiansList = politicians => ({
+  type: POLITICIANS_CHANGE,
+  politicians,
+})
+
+// Reducer
+const INITIAL_STATE = {}
+
+const listPoliticiansReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case POLITICIANS_CHANGE:
+      return {
+        ...state,
+        ...action.politicians,
+      }
+    default:
+      return state
+  }
 }
 
-const Multiselect = ({
-  label,
-  placeholder,
-  value,
-  loadOptions,
-  onChange,
-  onInputChange,
-}) => {
-  return (
-    <div>
-      <h4>{label}</h4>
-      <Select.Async
-        placeholder={placeholder}
-        multi
-        value={value}
-        loadOptions={loadOptions}
-        onChange={onChange}
-        onInputChange={onInputChange}
-      />
-    </div>
-  )
-}
-
-export default Multiselect
+export default listPoliticiansReducer

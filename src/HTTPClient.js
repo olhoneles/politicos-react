@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, Marcelo Jorge Vieira <metal@alucinados.com>
+ * Copyright (c) 2017, Marcelo Jorge Vieira <metal@alucinados.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,21 +15,14 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React from 'react'
-import PoliticianListItem from './politician_list_item'
+import axios from 'axios'
 
-const PoliticianList = props => {
-  const politicianItems = props.politicians.map(politician => {
-    return (
-      <PoliticianListItem
-        onPoliticianSelect={props.onPoliticianSelect}
-        key={politician.id}
-        politician={politician}
-      />
-    )
-  })
+const politicosAPIURL = 'http://politicos.olhoneles.org/api/v0'
 
-  return <ul className="col-lg-12 list-group politicians">{politicianItems}</ul>
+const HTTPClient = {
+  get(url) {
+    return axios.get(politicosAPIURL + url)
+  },
 }
 
-export default PoliticianList
+export default HTTPClient
