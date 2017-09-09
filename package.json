@@ -9,20 +9,35 @@
     "build:lib": "rimraf lib && babel src/ -d lib/",
     "build:dist": "rimraf dist && webpack --config webpack.config.dist.js --optimize-minimize",
     "build": "npm run build:lib && npm run build:dist",
-    "lint": "eslint src"
+    "lint": "prettier --write 'src/**/*.js'",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "printWidth": 80,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "semi": false
   },
   "author": "Marcelo Jorge Vieira <metal@alucinados.com>",
   "license": "AGPL-1.0",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.0",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "eslint": "^4.7.1",
-    "eslint-plugin-react": "^7.3.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.1",
+    "prettier": "^1.7.0",
     "rimraf": "^2.5.2",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.8.0"

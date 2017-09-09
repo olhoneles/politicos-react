@@ -15,11 +15,10 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React from "react";
-import Select from "react-select";
+import React from 'react'
+import Select from 'react-select'
 
-
-const Multiselect = ({label, placeholder, value, loadOptions, onChange}) => {
+const Multiselect = ({ label, placeholder, value, loadOptions, onChange }) => {
   return (
     <div>
       <h4>{label}</h4>
@@ -28,9 +27,10 @@ const Multiselect = ({label, placeholder, value, loadOptions, onChange}) => {
         multi
         value={value}
         loadOptions={loadOptions}
-        onChange={onChange} />
+        onChange={onChange}
+      />
     </div>
-  );
-};
+  )
+}
 
-export default Multiselect;
+export default Multiselect

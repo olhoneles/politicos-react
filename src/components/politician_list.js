@@ -15,24 +15,21 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React from "react";
-import PoliticianListItem from "./politician_list_item";
+import React from 'react'
+import PoliticianListItem from './politician_list_item'
 
-const PoliticianList = (props) => {
-  const politicianItems = props.politicians.map((politician) => {
+const PoliticianList = props => {
+  const politicianItems = props.politicians.map(politician => {
     return (
       <PoliticianListItem
         onPoliticianSelect={props.onPoliticianSelect}
         key={politician.id}
-        politician={politician} />
-    );
-  });
+        politician={politician}
+      />
+    )
+  })
 
-  return (
-    <ul className="col-lg-12 list-group politicians">
-      {politicianItems}
-    </ul>
-  );
-};
+  return <ul className="col-lg-12 list-group politicians">{politicianItems}</ul>
+}
 
-export default PoliticianList;
+export default PoliticianList
