@@ -16,11 +16,16 @@
  */
 
 export const POLITICIANS_CHANGE = 'POLITICIANS_CHANGE'
+export const POLITICIANS_RESET = 'POLITICIANS_RESET'
 
 // Action creators
 export const changePoliticiansList = politicians => ({
   type: POLITICIANS_CHANGE,
   politicians,
+})
+
+export const resetPoliticiansList = () => ({
+  type: POLITICIANS_RESET,
 })
 
 // Reducer
@@ -31,7 +36,14 @@ const listPoliticiansReducer = (state = INITIAL_STATE, action) => {
     case POLITICIANS_CHANGE:
       return {
         ...state,
-        ...action.politicians,
+        objects: action.politicians.objects,
+        meta: action.politicians.meta,
+      }
+    case POLITICIANS_RESET:
+      return {
+        ...state,
+        meta: null,
+        objects: null,
       }
     default:
       return state

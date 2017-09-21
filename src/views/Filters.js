@@ -19,7 +19,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import HTTPClient from '../HTTPClient'
-import { changePoliticiansList } from '../select/politiciansDuck'
+import {
+  changePoliticiansList,
+  resetPoliticiansList,
+} from '../select/politiciansDuck'
 import {
   SelectCity,
   SelectEducation,
@@ -36,6 +39,8 @@ import {
 
 export class Filters extends Component {
   onChangeQuery() {
+    this.props.dispatch(resetPoliticiansList())
+
     const state = this.props.state
     let queryString = new URLSearchParams()
 

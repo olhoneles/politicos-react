@@ -21,6 +21,7 @@ import { connect } from 'react-redux'
 import HTTPClient from '../HTTPClient'
 import PoliticiansListItem from './PoliticiansListItem'
 import { changePoliticiansList } from '../select/politiciansDuck'
+import Loading from '../components/Loading'
 
 export class PoliticiansList extends Component {
   componentDidMount() {
@@ -31,7 +32,7 @@ export class PoliticiansList extends Component {
 
   render() {
     if (!this.props.data) {
-      return null
+      return <Loading />
     }
 
     const politicianItems = this.props.data.map(politician => {
