@@ -16,6 +16,7 @@
  */
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Multiselect, { getOptionsCallback } from '../components/Multiselect'
@@ -60,6 +61,12 @@ const mapStateToProps = ({ gender }) => {
     list: gender.list,
     selected: gender.selected,
   }
+}
+
+SelectGender.propTypes = {
+  dispatch: PropTypes.func,
+  list: PropTypes.array,
+  selected: PropTypes.array,
 }
 
 export default connect(mapStateToProps)(SelectGender)

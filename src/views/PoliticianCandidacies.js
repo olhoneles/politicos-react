@@ -15,8 +15,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import _ from 'lodash'
 import React from 'react'
+import PropTypes from 'prop-types'
+import _ from 'lodash'
 
 const CandidacyListItem = ({ candidacy }) => {
   const status = candidacy.elected ? 'Eleito' : 'Não eleito'
@@ -37,12 +38,20 @@ const CandidacyListItem = ({ candidacy }) => {
   )
 }
 
+CandidacyListItem.propTypes = {
+  candidacy: PropTypes.object,
+}
+
 const CandidacyList = ({ candidacies }) => {
   const candidacyItems = candidacies.map(candidacy => {
     return <CandidacyListItem key={candidacy.id} candidacy={candidacy} />
   })
 
   return <dd>{candidacyItems}</dd>
+}
+
+CandidacyList.propTypes = {
+  candidacies: PropTypes.array,
 }
 
 const CandidacyYear = props => {
@@ -52,6 +61,11 @@ const CandidacyYear = props => {
       <CandidacyList candidacies={props.candidacies[props.year]} />
     </dl>
   )
+}
+
+CandidacyYear.propTypes = {
+  year: PropTypes.string,
+  candidacies: PropTypes.object,
 }
 
 const PoliticianCandidacies = props => {
@@ -70,6 +84,13 @@ const PoliticianCandidacies = props => {
       <div className="panel-body">{candidacyYears}</div>
     </div>
   )
+}
+
+PoliticianCandidacies.propTypes = {
+  candidacy: PropTypes.object,
+  candidacies: PropTypes.object,
+  year: PropTypes.number,
+  data: PropTypes.array,
 }
 
 export default PoliticianCandidacies

@@ -16,6 +16,7 @@
  */
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import HTTPClient from '../HTTPClient'
@@ -128,6 +129,11 @@ const mapStateToProps = state => {
   return {
     state,
   }
+}
+
+Filters.propTypes = {
+  state: PropTypes.object,
+  dispatch: PropTypes.func,
 }
 
 export default connect(mapStateToProps)(Filters)

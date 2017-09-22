@@ -16,6 +16,7 @@
  */
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import debounce from 'es6-promise-debounce'
 
@@ -64,6 +65,12 @@ const mapStateToProps = ({ city }) => {
     list: city.list,
     selected: city.selected,
   }
+}
+
+SelectCity.propTypes = {
+  dispatch: PropTypes.func,
+  list: PropTypes.object,
+  selected: PropTypes.array,
 }
 
 export default connect(mapStateToProps)(SelectCity)

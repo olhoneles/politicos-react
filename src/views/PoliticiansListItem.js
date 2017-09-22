@@ -16,6 +16,8 @@
  */
 
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import PoliticianDetail from './PoliticianDetail'
 
 const PoliticianListItem = ({ politician }) => {
@@ -26,6 +28,10 @@ const PoliticianListItem = ({ politician }) => {
       </div>
     </li>
   )
+}
+
+PoliticianListItem.propTypes = {
+  politician: PropTypes.object,
 }
 
 export default PoliticianListItem

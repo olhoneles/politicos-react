@@ -16,6 +16,7 @@
  */
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import PoliticianCandidacies from './PoliticianCandidacies'
 
@@ -113,6 +114,10 @@ class PoliticianDetail extends Component {
       </div>
     )
   }
+}
+
+PoliticianDetail.propTypes = {
+  politician: PropTypes.object,
 }
 
 export default PoliticianDetail

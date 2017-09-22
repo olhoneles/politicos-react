@@ -16,6 +16,8 @@
  */
 
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import Select from 'react-select'
 
 export const getOptionsCallback = (input, callback, opts) => {
@@ -45,6 +47,15 @@ const Multiselect = ({
       />
     </div>
   )
+}
+
+Multiselect.propTypes = {
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
+  value: PropTypes.array,
+  loadOptions: PropTypes.func,
+  onChange: PropTypes.func,
+  onInputChange: PropTypes.func,
 }
 
 export default Multiselect

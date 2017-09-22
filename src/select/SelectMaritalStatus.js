@@ -16,6 +16,7 @@
  */
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import HTTPClient from '../HTTPClient'
@@ -63,6 +64,12 @@ const mapStateToProps = ({ maritalStatus }) => {
     list: maritalStatus.list,
     selected: maritalStatus.selected,
   }
+}
+
+SelectMaritalStatus.propTypes = {
+  dispatch: PropTypes.func,
+  list: PropTypes.object,
+  selected: PropTypes.array,
 }
 
 export default connect(mapStateToProps)(SelectMaritalStatus)

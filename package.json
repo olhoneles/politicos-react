@@ -46,6 +46,7 @@
     "axios": "^0.16.2",
     "es6-promise-debounce": "^1.0.1",
     "lodash": "^4.17.4",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
