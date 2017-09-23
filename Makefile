@@ -1,11 +1,15 @@
+NPM ?= $(shell which npm)
+YARN ?= $(shell which yarn)
+PKG_MANAGER ?= $(if $(YARN),$(YARN),$(NPM))
+
 setup:
-	@npm install
+	@$(PKG_MANAGER) install
 
 run:
-	@npm start
+	@$(PKG_MANAGER) run start
 
 build:
-	@npm run build
+	@$(PKG_MANAGER) run build
 
 lint:
-	@npm run lint
+	@$(PKG_MANAGER) run lint
