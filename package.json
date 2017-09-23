@@ -11,7 +11,6 @@
     "build": "npm run build:lib && npm run build:dist",
     "lint": "eslint src/",
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
-    "precommit": "lint-staged"
   },
   "lint-staged": {
     "*.js": [
