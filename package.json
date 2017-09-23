@@ -9,7 +9,7 @@
     "build:lib": "rimraf lib && babel src/ -d lib/",
     "build:dist": "rimraf dist && webpack --config webpack.config.dist.js --optimize-minimize",
     "build": "npm run build:lib && npm run build:dist",
-    "lint": "eslint src/",
+    "lint": "eslint *.js src/",
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "precommit": "lint-staged"
   },

@@ -1,14 +1,16 @@
-var webpack = require("webpack");
+/*global __dirname, require */
+
+var webpack = require('webpack')
 
 module.exports = {
   cache: true,
-  entry: __dirname + "/src/index.js",
+  entry: __dirname + '/src/index.js',
   output: {
-    path: __dirname + "/dist",
-    publicPath: "/dist/",
-    filename: "politicos.js",
-    library: "politicos",
-    libraryTarget: "umd"
+    path: __dirname + '/dist',
+    publicPath: '/dist/',
+    filename: 'politicos.js',
+    library: 'politicos',
+    libraryTarget: 'umd',
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
@@ -16,21 +18,21 @@ module.exports = {
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("production")
-      }
-    })
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
   ],
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         query: {
-          presets: ["es2015", "react", "stage-0"]
-        }
-      }
-    ]
+          presets: ['es2015', 'react', 'stage-0'],
+        },
+      },
+    ],
   },
-};
+}
