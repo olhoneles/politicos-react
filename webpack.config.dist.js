@@ -1,6 +1,8 @@
 /*global __dirname, require */
 
-var webpack = require('webpack')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   cache: true,
@@ -8,12 +10,19 @@ module.exports = {
   devtool: 'source-map',
   output: {
     path: __dirname + '/dist',
-    publicPath: '/dist/',
-    filename: 'politicos.js',
+    publicPath: '',
+    filename: 'politicos.[hash:8].js',
     library: 'politicos',
     libraryTarget: 'umd',
   },
   plugins: [
+    new CopyWebpackPlugin([
+      { from: __dirname + '/style', to: __dirname + '/dist/style' },
+    ]),
+    new HtmlWebpackPlugin({
+      filename: __dirname + '/dist/index.html',
+      template: __dirname + '/index.html',
+    }),
     new webpack.LoaderOptionsPlugin({
       inline: true,
     }),
