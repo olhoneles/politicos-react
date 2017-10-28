@@ -1,4 +1,4 @@
-# Politicos React Client
+# Politicos React Client [![Build Status](https://secure.travis-ci.org/olhoneles/politicos-react.png?branch=master)](https://travis-ci.org/olhoneles/politicos-react)
 
 
 ## Getting Started

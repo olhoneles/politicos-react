@@ -15,6 +15,7 @@
     "prepublish": "npm run build",
     "deploy": "gh-pages -d dist",
     "test": "jest --watch --env=jsdom",
+    "test-ci": "CI=true jest --env=jsdom",
     "coverage": "jest --env=jsdom --coverage --no-cache"
   },
   "lint-staged": {
