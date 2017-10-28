@@ -13,3 +13,6 @@ build:
 
 lint:
 	@$(PKG_MANAGER) run lint
+
+test:
+	@$(PKG_MANAGER) run test

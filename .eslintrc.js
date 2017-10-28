@@ -4,9 +4,11 @@ module.exports = {
     browser: true,
     commonjs: true,
     es6: true,
+    jest: true,
   },
   extends: [
     "eslint:recommended",
+    "plugin:jest/recommended",
     "plugin:react/recommended",
     "prettier",
   ],
@@ -21,7 +23,7 @@ module.exports = {
   globals: {
     process: true,
   },
-  plugins: ["react", "prettier"],
+  plugins: ["react", "jest", "prettier"],
   rules: {
     "linebreak-style": ["error", "unix"],
     "prettier/prettier": "error",

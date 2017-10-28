@@ -3,13 +3,14 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path')
 
 module.exports = {
   cache: true,
-  entry: __dirname + '/src/index.js',
+  entry: path.join(__dirname, '../src/index.js'),
   devtool: 'source-map',
   output: {
-    path: __dirname + '/dist',
+    path: path.join(__dirname, '../dist'),
     publicPath: '',
     filename: 'politicos.[hash:8].js',
     library: 'politicos',
@@ -17,11 +18,14 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: __dirname + '/style', to: __dirname + '/dist/style' },
+      {
+        from: path.join(__dirname, '../style'),
+        to: path.join(__dirname, '../dist/style'),
+      },
     ]),
     new HtmlWebpackPlugin({
-      filename: __dirname + '/dist/index.html',
-      template: __dirname + '/index.html',
+      filename: path.join(__dirname, '../dist/index.html'),
+      template: path.join(__dirname, '../index.html'),
     }),
     new webpack.LoaderOptionsPlugin({
       inline: true,

@@ -5,9 +5,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   devtool: 'source-map',
-  entry: ['./src/index.js'],
+  entry: [path.join(__dirname, '../src/index.js')],
   output: {
-    path: __dirname,
+    path: path.join(__dirname, '../'),
     publicPath: '/',
     filename: './bundle.js',
   },
@@ -16,11 +16,11 @@ module.exports = {
     contentBase: './',
   },
   resolve: {
-    modules: [path.join(__dirname, 'src'), 'node_modules'],
+    modules: [path.join(__dirname, '../src'), 'node_modules'],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: __dirname + '/index.html',
+      template: path.join(__dirname, '../index.html'),
     }),
   ],
   module: {
