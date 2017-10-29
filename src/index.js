@@ -22,6 +22,7 @@ import { createStore, applyMiddleware, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 
 import defaultReducers from './defaultReducers'
+import HTTPClient from './HTTPClient'
 import PoliticiansList from './views/PoliticiansList'
 import Filters from './views/Filters'
 

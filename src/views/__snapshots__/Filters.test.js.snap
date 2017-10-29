@@ -1199,7 +1199,7 @@ exports[`<Filters /> renders without crashing 1`] = `
       className="col-md-6"
     >
       <button
-        className="btn btn-primary"
+        className="btn btn-primary btn-filter"
         onClick={[Function]}
       >
         Filtrar

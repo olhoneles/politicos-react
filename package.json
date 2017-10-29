@@ -3,6 +3,9 @@
   "version": "0.2.1",
   "description": "Politicos React Client",
   "main": "index.js",
+  "engines": {
+    "node": ">=7.5.0"
+  },
   "repository": "git@github.com:olhoneles/politicos-react.git",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config config/webpack.config.dev.js",
@@ -45,6 +48,9 @@
     "babel-preset-stage-0": "^6.24.1",
     "copy-webpack-plugin": "^4.2.0",
     "dotenv": "^4.0.0",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.2",
+    "enzyme-to-json": "^3.1.4",
     "es6-promise": "^4.1.1",
     "eslint": "^4.10.0",
     "eslint-config-prettier": "^2.5.0",
@@ -83,6 +89,7 @@
       "src/**/*.{js,jsx}"
     ],
     "setupFiles": [
+      "<rootDir>/config/polyfills.js",
       "<rootDir>/config/jest/setup.js"
     ],
     "testPathIgnorePatterns": [
@@ -99,6 +106,7 @@
     ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
-    }
+    },
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   }
 }

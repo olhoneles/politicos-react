@@ -39,8 +39,6 @@ import {
 
 export class Filters extends Component {
   onChangeQuery() {
-    this.props.dispatch(resetPoliticiansList())
-
     const state = this.props.state
     let queryString = new URLSearchParams()
 
@@ -54,6 +52,12 @@ export class Filters extends Component {
         return queryString.set(obj.query, item.value)
       })
     })
+
+    if (queryString.toString() == '') {
+      return
+    }
+
+    this.props.dispatch(resetPoliticiansList())
 
     this.props.HTTPClient
       .get('/politicians?' + queryString.toString())
@@ -113,7 +117,7 @@ export class Filters extends Component {
         <div className="filter-row row">
           <div className="col-md-6">
             <button
-              className="btn btn-primary"
+              className="btn btn-primary btn-filter"
               onClick={this.onChangeQuery.bind(this)}
             >
               Filtrar

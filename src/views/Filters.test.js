@@ -19,8 +19,13 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import configureMockStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
+import { mount } from 'enzyme'
 
 import { Filters } from './Filters'
+import {
+  changePoliticiansList,
+  resetPoliticiansList,
+} from '../select/politiciansDuck'
 
 describe('<Filters />', () => {
   const mockStore = configureMockStore()
@@ -48,5 +53,51 @@ describe('<Filters />', () => {
     )
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
+  })
+
+  it('should not call dispatches when there is no selected item', () => {
+    const state = { metal: {} }
+    const dispatchMock = jest.fn()
+    const HTTPClient = { get: () => Promise.resolve({}) }
+    const component = mount(
+      <Provider store={store}>
+        <Filters
+          dispatch={dispatchMock}
+          state={state}
+          HTTPClient={HTTPClient}
+        />
+      </Provider>
+    )
+    component.find('.btn-filter').simulate('click')
+
+    expect(dispatchMock).toHaveBeenCalledTimes(0)
+  })
+
+  it('should call dispatches when there is selected item', () => {
+    const state = { metal: { selected: [{ value: 123 }], query: 'q' } }
+    const result = { data: { metal: 123 } }
+    const HTTPClient = {
+      get: jest.fn(() => {
+        return {
+          then: fn => fn(result),
+        }
+      }),
+    }
+    const dispatchMock = jest.fn()
+    const component = mount(
+      <Provider store={store}>
+        <Filters
+          dispatch={dispatchMock}
+          state={state}
+          HTTPClient={HTTPClient}
+        />
+      </Provider>
+    )
+    component.find('.btn-filter').simulate('click')
+
+    expect(dispatchMock).toHaveBeenCalledWith(resetPoliticiansList())
+    expect(dispatchMock).toHaveBeenCalledWith(
+      changePoliticiansList(result.data)
+    )
   })
 })
