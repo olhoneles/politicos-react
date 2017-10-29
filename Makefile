@@ -1,3 +1,5 @@
+.PHONY: setup run build lint test coverage
+
 NPM ?= $(shell which npm)
 YARN ?= $(shell which yarn)
 PKG_MANAGER ?= $(if $(YARN),$(YARN),$(NPM))
@@ -16,3 +18,6 @@ lint:
 
 test:
 	@$(PKG_MANAGER) run test
+
+coverage:
+	$(PKG_MANAGER) run coverage
