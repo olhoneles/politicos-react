@@ -34,8 +34,8 @@ const App = () => {
   return (
     <Provider store={store}>
       <div className="container">
-        <Filters />
-        <PoliticiansList />
+        <Filters HTTPClient={HTTPClient} />
+        <PoliticiansList HTTPClient={HTTPClient} />
       </div>
     </Provider>
   )

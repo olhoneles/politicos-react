@@ -19,13 +19,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import HTTPClient from '../HTTPClient'
 import Multiselect, { getOptionsCallback } from '../components/Multiselect'
 import { changeStateList, changeStateSelected } from './stateDuck'
 
 class SelectState extends Component {
   componentDidMount() {
-    HTTPClient.get('/states/').then(result => {
+    this.props.HTTPClient.get('/states/').then(result => {
       this.props.dispatch(changeStateList(result.data))
     })
   }
@@ -67,6 +66,7 @@ SelectState.propTypes = {
   dispatch: PropTypes.func,
   list: PropTypes.object,
   selected: PropTypes.array,
+  HTTPClient: PropTypes.object,
 }
 
 export default connect(mapStateToProps)(SelectState)

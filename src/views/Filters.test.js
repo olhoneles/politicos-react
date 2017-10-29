@@ -40,9 +40,10 @@ describe('<Filters />', () => {
   const store = mockStore(storeStateMock)
 
   it('renders without crashing', () => {
+    const HTTPClient = { get: () => Promise.resolve({}) }
     const component = renderer.create(
       <Provider store={store}>
-        <Filters />
+        <Filters HTTPClient={HTTPClient} />
       </Provider>
     )
     const tree = component.toJSON()

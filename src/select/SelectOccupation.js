@@ -20,7 +20,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import debounce from 'es6-promise-debounce'
 
-import HTTPClient from '../HTTPClient'
 import Multiselect, { getOptionsCallback } from '../components/Multiselect'
 import {
   changeOccupationList,
@@ -30,7 +29,7 @@ import {
 
 class SelectOccupation extends Component {
   componentDidMount() {
-    HTTPClient.get('/occupations/search').then(result => {
+    this.props.HTTPClient.get('/occupations/search').then(result => {
       this.props.dispatch(changeOccupationList(result.data))
     })
   }
@@ -76,6 +75,7 @@ SelectOccupation.propTypes = {
   dispatch: PropTypes.func,
   list: PropTypes.object,
   selected: PropTypes.array,
+  HTTPClient: PropTypes.object,
 }
 
 export default connect(mapStateToProps)(SelectOccupation)

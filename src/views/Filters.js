@@ -19,7 +19,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import HTTPClient from '../HTTPClient'
 import {
   changePoliticiansList,
   resetPoliticiansList,
@@ -56,9 +55,11 @@ export class Filters extends Component {
       })
     })
 
-    HTTPClient.get('/politicians?' + queryString.toString()).then(result => {
-      this.props.dispatch(changePoliticiansList(result.data))
-    })
+    this.props.HTTPClient
+      .get('/politicians?' + queryString.toString())
+      .then(result => {
+        this.props.dispatch(changePoliticiansList(result.data))
+      })
   }
 
   render() {
@@ -66,47 +67,47 @@ export class Filters extends Component {
       <div>
         <div className="filter-row row">
           <div className="col-md-12">
-            <SelectPolitician />
+            <SelectPolitician {...this.props} />
           </div>
         </div>
         <div className="filter-row row">
           <div className="col-lg-6">
-            <SelectPoliticalParty />
+            <SelectPoliticalParty {...this.props} />
           </div>
           <div className="col-lg-6">
-            <SelectPoliticalOffice />
-          </div>
-        </div>
-        <div className="filter-row row">
-          <div className="col-lg-6">
-            <SelectEducation />
-          </div>
-          <div className="col-lg-6">
-            <SelectElection />
+            <SelectPoliticalOffice {...this.props} />
           </div>
         </div>
         <div className="filter-row row">
           <div className="col-lg-6">
-            <SelectState />
+            <SelectEducation {...this.props} />
           </div>
           <div className="col-lg-6">
-            <SelectCity />
-          </div>
-        </div>
-        <div className="filter-row row">
-          <div className="col-lg-6">
-            <SelectElected />
-          </div>
-          <div className="col-lg-6">
-            <SelectGender />
+            <SelectElection {...this.props} />
           </div>
         </div>
         <div className="filter-row row">
           <div className="col-lg-6">
-            <SelectOccupation />
+            <SelectState {...this.props} />
           </div>
           <div className="col-lg-6">
-            <SelectMaritalStatus />
+            <SelectCity {...this.props} />
+          </div>
+        </div>
+        <div className="filter-row row">
+          <div className="col-lg-6">
+            <SelectElected {...this.props} />
+          </div>
+          <div className="col-lg-6">
+            <SelectGender {...this.props} />
+          </div>
+        </div>
+        <div className="filter-row row">
+          <div className="col-lg-6">
+            <SelectOccupation {...this.props} />
+          </div>
+          <div className="col-lg-6">
+            <SelectMaritalStatus {...this.props} />
           </div>
         </div>
         <div className="filter-row row">
@@ -134,6 +135,7 @@ const mapStateToProps = state => {
 Filters.propTypes = {
   state: PropTypes.object,
   dispatch: PropTypes.func,
+  HTTPClient: PropTypes.object,
 }
 
 export default connect(mapStateToProps)(Filters)

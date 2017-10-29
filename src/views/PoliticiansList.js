@@ -19,14 +19,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import HTTPClient from '../HTTPClient'
 import PoliticiansListItem from './PoliticiansListItem'
 import { changePoliticiansList } from '../select/politiciansDuck'
 import Loading from '../components/Loading'
 
 export class PoliticiansList extends Component {
   componentDidMount() {
-    HTTPClient.get('/politicians/').then(politicians => {
+    this.props.HTTPClient.get('/politicians/').then(politicians => {
       this.props.dispatch(changePoliticiansList(politicians.data))
     })
   }
@@ -63,6 +62,7 @@ PoliticiansList.propTypes = {
   data: PropTypes.array,
   dispatch: PropTypes.func,
   onPoliticianSelect: PropTypes.func,
+  HTTPClient: PropTypes.object,
 }
 
 export default connect(mapStateToProps)(PoliticiansList)
