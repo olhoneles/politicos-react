@@ -40,9 +40,6 @@ const PoliticianCandidacies = props => {
 }
 
 PoliticianCandidacies.propTypes = {
-  candidacy: PropTypes.object,
-  candidacies: PropTypes.object,
-  year: PropTypes.number,
   data: PropTypes.array,
 }
 
