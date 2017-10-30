@@ -17,33 +17,19 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
 
-import CandidacyYear from './CandidacyYear'
+import CandidacyListItem from './CandidacyListItem'
 
-const PoliticianCandidacies = props => {
-  const candidacies = _.groupBy(props.data, x => {
-    return new Date(x.election_round.date).getFullYear()
-  })
-  const candidacyYears = Object.keys(candidacies).map(year => {
-    return <CandidacyYear key={year} year={year} candidacies={candidacies} />
+const CandidacyList = ({ candidacies }) => {
+  const candidacyItems = candidacies.map(candidacy => {
+    return <CandidacyListItem key={candidacy.id} candidacy={candidacy} />
   })
 
-  return (
-    <div className="panel panel-info candidacies">
-      <div className="panel-heading">
-        <h3 className="panel-title">Candidaturas</h3>
-      </div>
-      <div className="panel-body">{candidacyYears}</div>
-    </div>
-  )
+  return <dd>{candidacyItems}</dd>
 }
 
-PoliticianCandidacies.propTypes = {
-  candidacy: PropTypes.object,
-  candidacies: PropTypes.object,
-  year: PropTypes.number,
-  data: PropTypes.array,
+CandidacyList.propTypes = {
+  candidacies: PropTypes.array,
 }
 
-export default PoliticianCandidacies
+export default CandidacyList
