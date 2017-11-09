@@ -35,7 +35,7 @@ class SelectMaritalStatus extends Component {
 
   getOptions(input, callback) {
     const maritalStatus = this.props.list.objects.map(item => {
-      return { label: item.name, value: item.name }
+      return { label: item.name, value: item.slug }
     })
     return getOptionsCallback(input, callback, maritalStatus)
   }
