@@ -32,7 +32,7 @@ class SelectCity extends Component {
 
   getOptions(input, callback) {
     const city = this.props.list.objects.map(item => {
-      return { label: item.name, value: item.slug }
+      return { label: item.name, value: item.name }
     })
     return getOptionsCallback(input, callback, city)
   }
