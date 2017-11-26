@@ -21,24 +21,27 @@ import renderer from 'react-test-renderer'
 import PoliticianDetail from './PoliticianDetail'
 
 describe('<PoliticianDetail />', () => {
-  const politician = {
-    id: 123,
-    name: 'Metal',
-    alternative_names: ['Marcelo'],
-    political_parties: [{ political_party: { siglum: 'rock' } }],
-    marital_status: { name: 'single' },
-    occupation: { name: 'Developer' },
-    education: { name: 'rock' },
-    date_of_birth: '1800-01-01',
-    nationality: { name: 'rock' },
-    place_of_birth: 'heavy metal',
-    state: { name: 'rock' },
-    ethnicity: { name: 'rock' },
-    email: 'rock@rock.com',
-    website: 'https://rock.com',
-    picture: 'https://rock.com/me.png',
-    gender: 'M',
-  }
+  let politician
+  beforeEach(() => {
+    politician = {
+      id: 123,
+      name: 'Metal',
+      alternative_names: ['Marcelo'],
+      political_parties: [{ political_party: { siglum: 'rock' } }],
+      marital_status: { name: 'single' },
+      occupation: { name: 'Developer' },
+      education: { name: 'rock' },
+      date_of_birth: '1800-01-01',
+      nationality: { name: 'rock' },
+      place_of_birth: 'heavy metal',
+      state: { name: 'rock' },
+      ethnicity: { name: 'rock' },
+      email: 'rock@rock.com',
+      website: 'https://rock.com',
+      picture: 'https://rock.com/me.png',
+      gender: 'M',
+    }
+  })
 
   it('renders without crashing', () => {
     const component = renderer.create(
@@ -52,5 +55,43 @@ describe('<PoliticianDetail />', () => {
     const component = renderer.create(<PoliticianDetail />)
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
+  })
+
+  describe('Details', () => {
+    it('renders gender Female', () => {
+      politician['gender'] = 'F'
+      const component = renderer.create(
+        <PoliticianDetail politician={politician} />
+      )
+      const tree = component.toJSON()
+      expect(tree).toMatchSnapshot()
+    })
+
+    it('renders politician name without alternative names', () => {
+      politician.alternative_names = []
+      const component = renderer.create(
+        <PoliticianDetail politician={politician} />
+      )
+      const tree = component.toJSON()
+      expect(tree).toMatchSnapshot()
+    })
+
+    it('renders politician name without state', () => {
+      delete politician.state
+      const component = renderer.create(
+        <PoliticianDetail politician={politician} />
+      )
+      const tree = component.toJSON()
+      expect(tree).toMatchSnapshot()
+    })
+
+    it('renders politician name without ethnicity', () => {
+      delete politician.ethnicity
+      const component = renderer.create(
+        <PoliticianDetail politician={politician} />
+      )
+      const tree = component.toJSON()
+      expect(tree).toMatchSnapshot()
+    })
   })
 })

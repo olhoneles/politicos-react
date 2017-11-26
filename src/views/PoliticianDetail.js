@@ -26,83 +26,92 @@ class PoliticianDetail extends Component {
     this.politician = this.props.politician
   }
 
-  render() {
-    if (!this.politician || this.politician.length <= 0) {
-      return <div>Loading...</div>
+  getPoliticianName() {
+    if (
+      this.politician.alternative_names &&
+      this.politician.alternative_names[0] &&
+      this.politician.name != this.politician.alternative_names[0].name
+    ) {
+      return `${this.politician.alternative_names[0].name} (${this.politician
+        .name})`
     }
+    return this.politician.name
+  }
 
-    const alternativeNames = this.politician.alternative_names.map(item => {
-      return item.name
-    })
+  getGender() {
+    if (this.politician.gender == 'M') {
+      return 'Masculino'
+    } else if (this.politician.gender == 'F') {
+      return 'Feminino'
+    } else {
+      return 'Não informado'
+    }
+  }
 
-    const politicalParties = this.politician.political_parties
+  getPoliticalParties() {
+    return this.politician.political_parties
       .map(item => {
         return item.political_party.siglum
       })
       .join(', ')
+  }
 
-    let picture = ''
+  getPicture() {
     if (!this.politician.picture) {
-      picture = (
+      return (
         <div>
           <span className="glyphicon glyphicon-user" aria-hidden="true" />Sem
           Foto
         </div>
       )
     } else {
-      picture = (
+      return (
         <img src={this.politician.picture} className="politician-picture" />
       )
     }
+  }
 
-    let politicianName
-    if (
-      this.politician.alternative_names &&
-      this.politician.name != this.politician.alternative_names[0].name
-    ) {
-      politicianName = `${this.politician.alternative_names[0].name} (${this
-        .politician.name})`
-    } else {
-      politicianName = this.politician.name
-    }
+  getAlternativeNames() {
+    return this.politician.alternative_names.map(item => {
+      return item.name
+    })
+  }
 
-    let gender
-    if (this.politician.gender == 'M') {
-      gender = 'Masculino'
-    } else if (this.politician.gender == 'F') {
-      gender = 'Feminino'
-    } else {
-      gender = 'Não informado'
+  getEthnicity() {
+    return this.politician.ethnicity ? this.politician.ethnicity.name : ''
+  }
+
+  getPlaceOfBirth() {
+    const state = this.politician.state ? `/${this.politician.state.name}` : ''
+    return `${this.politician.place_of_birth}${state}`
+  }
+
+  render() {
+    if (!this.politician || this.politician.length <= 0) {
+      return <div>Loading...</div>
     }
 
     return (
       <div className="">
         <div className="row">
           <div className="col-lg-12">
-            <div className="politician-name">{politicianName}</div>
+            <div className="politician-name">{this.getPoliticianName()}</div>
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-3">{picture}</div>
+          <div className="col-lg-3">{this.getPicture()}</div>
           <div className="col-lg-5">
             <div className="details">
-              <p>Sexo: {gender}</p>
-              <p>Partido: {politicalParties}</p>
+              <p>Sexo: {this.getGender()}</p>
+              <p>Partido: {this.getPoliticalParties()}</p>
               <p>Estado civil: {this.politician.marital_status.name}</p>
               <p>Ocupação: {this.politician.occupation.name}</p>
               <p>Escolaridade: {this.politician.education.name}</p>
               <p>Data de nascimento: {this.politician.date_of_birth}</p>
               <p>Nacionalidade: {this.politician.nationality.name}</p>
-              <p>
-                Naturalidade: {this.politician.place_of_birth}/{this.politician.state ? this.politician.state.name : null}
-              </p>
-              <p>Nomes Alternativos: {alternativeNames}</p>
-              <p>
-                Cor/Raça:{' '}
-                {this.politician.ethnicity
-                  ? this.politician.ethnicity.name
-                  : null}
-              </p>
+              <p>Naturalidade: {this.getPlaceOfBirth()}</p>
+              <p>Nomes Alternativos: {this.getAlternativeNames()}</p>
+              <p>Cor/Raça: {this.getEthnicity()}</p>
               <p>Email: {this.politician.email}</p>
               <p>Website: {this.politician.website}</p>
             </div>

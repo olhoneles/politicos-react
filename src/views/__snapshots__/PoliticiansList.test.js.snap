@@ -87,16 +87,13 @@ exports[`<PoliticiansList /> renders without crashing 1`] = `
               </p>
               <p>
                 Naturalidade: 
-                heavy metal
-                /
-                rock
+                heavy metal/rock
               </p>
               <p>
                 Nomes Alternativos: 
               </p>
               <p>
-                Cor/Raça:
-                 
+                Cor/Raça: 
                 rock
               </p>
               <p>
