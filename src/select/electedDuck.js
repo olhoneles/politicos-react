@@ -15,42 +15,42 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-export const ELECTED_LIST = 'ELECTED_LIST'
-export const ELECTED_SELECTED = 'ELECTED_SELECTED'
+export const ELECTED_LIST = "ELECTED_LIST";
+export const ELECTED_SELECTED = "ELECTED_SELECTED";
 
 // Action creators
 export const changeElectedList = list => ({
   type: ELECTED_LIST,
-  list,
-})
+  list
+});
 
 export const changeElectedSelected = selected => ({
   type: ELECTED_SELECTED,
-  selected,
-})
+  selected
+});
 
 // Reducer
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: 'candidacies__elected__in',
-}
+  query: "candidacies__elected__in"
+};
 
 const electedReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ELECTED_LIST:
       return {
         ...state,
-        list: action.list,
-      }
+        list: action.list
+      };
     case ELECTED_SELECTED:
       return {
         ...state,
-        selected: action.selected,
-      }
+        selected: action.selected
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default electedReducer
+export default electedReducer;

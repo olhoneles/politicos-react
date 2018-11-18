@@ -15,33 +15,33 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import Multiselect, { getOptionsCallback } from '../components/Multiselect'
+import Multiselect, { getOptionsCallback } from "../components/Multiselect";
 import {
   changePoliticalOfficeList,
-  changePoliticalOfficeSelected,
-} from './politicalOfficeDuck'
+  changePoliticalOfficeSelected
+} from "./politicalOfficeDuck";
 
 class SelectPoliticalOffice extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get('/political-offices/').then(result => {
-      this.props.dispatch(changePoliticalOfficeList(result.data))
-    })
+    this.props.HTTPClient.get("/political-offices/").then(result => {
+      this.props.dispatch(changePoliticalOfficeList(result.data));
+    });
   }
 
   getOptions(input, callback) {
     const politicalOffice = this.props.list.objects.map(item => {
-      return { label: item.name, value: item.slug }
-    })
-    return getOptionsCallback(input, callback, politicalOffice)
+      return { label: item.name, value: item.slug };
+    });
+    return getOptionsCallback(input, callback, politicalOffice);
   }
 
   render() {
     if (!this.props.list) {
-      return null
+      return null;
     }
 
     return (
@@ -50,10 +50,11 @@ class SelectPoliticalOffice extends Component {
         placeholder="Escolha um ou vários cargos..."
         loadOptions={this.getOptions.bind(this)}
         onChange={selected =>
-          this.props.dispatch(changePoliticalOfficeSelected(selected))}
+          this.props.dispatch(changePoliticalOfficeSelected(selected))
+        }
         value={this.props.selected}
       />
-    )
+    );
   }
 }
 
@@ -61,15 +62,15 @@ class SelectPoliticalOffice extends Component {
 const mapStateToProps = ({ politicalOffice }) => {
   return {
     list: politicalOffice.list,
-    selected: politicalOffice.selected,
-  }
-}
+    selected: politicalOffice.selected
+  };
+};
 
 SelectPoliticalOffice.propTypes = {
   dispatch: PropTypes.func,
   list: PropTypes.object,
   selected: PropTypes.array,
-  HTTPClient: PropTypes.object,
-}
+  HTTPClient: PropTypes.object
+};
 
-export default connect(mapStateToProps)(SelectPoliticalOffice)
+export default connect(mapStateToProps)(SelectPoliticalOffice);

@@ -15,42 +15,42 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-export const GENDER_LIST = 'GENDER_LIST'
-export const GENDER_SELECTED = 'GENDER_SELECTED'
+export const GENDER_LIST = "GENDER_LIST";
+export const GENDER_SELECTED = "GENDER_SELECTED";
 
 // Action creators
 export const changeGenderList = list => ({
   type: GENDER_LIST,
-  list,
-})
+  list
+});
 
 export const changeGenderSelected = selected => ({
   type: GENDER_SELECTED,
-  selected,
-})
+  selected
+});
 
 // Reducer
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: 'gender__in',
-}
+  query: "gender__in"
+};
 
 const genderReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case GENDER_LIST:
       return {
         ...state,
-        list: action.list,
-      }
+        list: action.list
+      };
     case GENDER_SELECTED:
       return {
         ...state,
-        selected: action.selected,
-      }
+        selected: action.selected
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default genderReducer
+export default genderReducer;

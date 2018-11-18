@@ -15,42 +15,42 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-export const MARITAL_STATUS_LIST = 'MARITAL_STATUS_LIST'
-export const MARITAL_STATUS_SELECTED = 'MARITAL_STATUS_SELECTED'
+export const MARITAL_STATUS_LIST = "MARITAL_STATUS_LIST";
+export const MARITAL_STATUS_SELECTED = "MARITAL_STATUS_SELECTED";
 
 // Action creators
 export const changeMaritalStatusList = list => ({
   type: MARITAL_STATUS_LIST,
-  list,
-})
+  list
+});
 
 export const changeMaritalStatusSelected = selected => ({
   type: MARITAL_STATUS_SELECTED,
-  selected,
-})
+  selected
+});
 
 // Reducer
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: 'marital_status__slug__in',
-}
+  query: "marital_status__slug__in"
+};
 
 const maritalStatusReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case MARITAL_STATUS_LIST:
       return {
         ...state,
-        list: action.list,
-      }
+        list: action.list
+      };
     case MARITAL_STATUS_SELECTED:
       return {
         ...state,
-        selected: action.selected,
-      }
+        selected: action.selected
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default maritalStatusReducer
+export default maritalStatusReducer;

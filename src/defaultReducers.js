@@ -15,18 +15,18 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import city from './select/cityDuck'
-import education from './select/educationDuck'
-import elected from './select/electedDuck'
-import election from './select/electionDuck'
-import gender from './select/genderDuck'
-import maritalStatus from './select/maritalStatusDuck'
-import occupation from './select/occupationDuck'
-import politicians from './select/politiciansDuck'
-import politician from './select/politicianDuck'
-import politicalParty from './select/politicalPartyDuck'
-import politicalOffice from './select/politicalOfficeDuck'
-import state from './select/stateDuck'
+import city from "./select/cityDuck";
+import education from "./select/educationDuck";
+import elected from "./select/electedDuck";
+import election from "./select/electionDuck";
+import gender from "./select/genderDuck";
+import maritalStatus from "./select/maritalStatusDuck";
+import occupation from "./select/occupationDuck";
+import politicians from "./select/politiciansDuck";
+import politician from "./select/politicianDuck";
+import politicalParty from "./select/politicalPartyDuck";
+import politicalOffice from "./select/politicalOfficeDuck";
+import state from "./select/stateDuck";
 
 const defaultReducers = {
   city,
@@ -40,7 +40,7 @@ const defaultReducers = {
   politicalParty,
   politician,
   politicians,
-  state,
-}
+  state
+};
 
-export default defaultReducers
+export default defaultReducers;

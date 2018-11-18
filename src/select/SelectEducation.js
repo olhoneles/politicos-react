@@ -15,30 +15,30 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import Multiselect, { getOptionsCallback } from '../components/Multiselect'
-import { changeEducationList, changeEducationSelected } from './educationDuck'
+import Multiselect, { getOptionsCallback } from "../components/Multiselect";
+import { changeEducationList, changeEducationSelected } from "./educationDuck";
 
 class SelectEducation extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get('/educations/').then(result => {
-      this.props.dispatch(changeEducationList(result.data))
-    })
+    this.props.HTTPClient.get("/educations/").then(result => {
+      this.props.dispatch(changeEducationList(result.data));
+    });
   }
 
   getOptions(input, callback) {
     const education = this.props.list.objects.map(item => {
-      return { label: item.name, value: item.name }
-    })
-    return getOptionsCallback(input, callback, education)
+      return { label: item.name, value: item.name };
+    });
+    return getOptionsCallback(input, callback, education);
   }
 
   render() {
     if (!this.props.list) {
-      return null
+      return null;
     }
 
     return (
@@ -47,10 +47,11 @@ class SelectEducation extends Component {
         placeholder="Escolha uma ou várias escolaridades..."
         loadOptions={this.getOptions.bind(this)}
         onChange={selected =>
-          this.props.dispatch(changeEducationSelected(selected))}
+          this.props.dispatch(changeEducationSelected(selected))
+        }
         value={this.props.selected}
       />
-    )
+    );
   }
 }
 
@@ -58,15 +59,15 @@ class SelectEducation extends Component {
 const mapStateToProps = ({ education }) => {
   return {
     list: education.list,
-    selected: education.selected,
-  }
-}
+    selected: education.selected
+  };
+};
 
 SelectEducation.propTypes = {
   dispatch: PropTypes.func,
   list: PropTypes.object,
   selected: PropTypes.array,
-  HTTPClient: PropTypes.object,
-}
+  HTTPClient: PropTypes.object
+};
 
-export default connect(mapStateToProps)(SelectEducation)
+export default connect(mapStateToProps)(SelectEducation);

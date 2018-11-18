@@ -15,31 +15,15 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, combineReducers } from 'redux'
-import thunk from 'redux-thunk'
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 
-import defaultReducers from './defaultReducers'
-import HTTPClient from './HTTPClient'
-import PoliticiansList from './views/PoliticiansList'
-import Filters from './views/Filters'
+ReactDOM.render(<App />, document.getElementById("root"));
 
-const App = () => {
-  const rootReducers = combineReducers({
-    ...defaultReducers,
-  })
-  const store = createStore(rootReducers, applyMiddleware(thunk))
-
-  return (
-    <Provider store={store}>
-      <div className="container">
-        <Filters HTTPClient={HTTPClient} />
-        <PoliticiansList HTTPClient={HTTPClient} />
-      </div>
-    </Provider>
-  )
-}
-
-ReactDOM.render(<App />, document.querySelector('.main'))
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: http://bit.ly/CRA-PWA
+serviceWorker.unregister();

@@ -15,14 +15,14 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import axios from 'axios'
+import axios from "axios";
 
-const politicosAPIURL = 'http://politicos.olhoneles.org/api/v0'
+const politicosAPIURL = "http://politicos.olhoneles.org/api/v0";
 
 const HTTPClient = {
   get(url) {
-    return axios.get(politicosAPIURL + url)
-  },
-}
+    return axios.get(politicosAPIURL + url);
+  }
+};
 
-export default HTTPClient
+export default HTTPClient;

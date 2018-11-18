@@ -15,30 +15,30 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import Multiselect, { getOptionsCallback } from '../components/Multiselect'
-import { changeElectedList, changeElectedSelected } from './electedDuck'
+import Multiselect, { getOptionsCallback } from "../components/Multiselect";
+import { changeElectedList, changeElectedSelected } from "./electedDuck";
 
 class SelectElected extends Component {
   componentDidMount() {
     const elected = [
-      { label: 'Eleito', value: 1 },
-      { label: 'Não Eleito', value: 0 },
-    ]
-    this.props.dispatch(changeElectedList(elected))
+      { label: "Eleito", value: 1 },
+      { label: "Não Eleito", value: 0 }
+    ];
+    this.props.dispatch(changeElectedList(elected));
   }
 
   getOptions(input, callback) {
-    const elected = this.props.list
-    return getOptionsCallback(input, callback, elected)
+    const elected = this.props.list;
+    return getOptionsCallback(input, callback, elected);
   }
 
   render() {
     if (!this.props.list) {
-      return null
+      return null;
     }
 
     return (
@@ -47,10 +47,11 @@ class SelectElected extends Component {
         placeholder="Filtre quem foi eleito ou não..."
         loadOptions={this.getOptions.bind(this)}
         onChange={selected =>
-          this.props.dispatch(changeElectedSelected(selected))}
+          this.props.dispatch(changeElectedSelected(selected))
+        }
         value={this.props.selected}
       />
-    )
+    );
   }
 }
 
@@ -58,14 +59,14 @@ class SelectElected extends Component {
 const mapStateToProps = ({ elected }) => {
   return {
     list: elected.list,
-    selected: elected.selected,
-  }
-}
+    selected: elected.selected
+  };
+};
 
 SelectElected.propTypes = {
   dispatch: PropTypes.func,
   list: PropTypes.array,
-  selected: PropTypes.array,
-}
+  selected: PropTypes.array
+};
 
-export default connect(mapStateToProps)(SelectElected)
+export default connect(mapStateToProps)(SelectElected);

@@ -15,30 +15,30 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import Multiselect, { getOptionsCallback } from '../components//Multiselect'
-import { changeElectionList, changeElectionSelected } from './electionDuck'
+import Multiselect, { getOptionsCallback } from "../components//Multiselect";
+import { changeElectionList, changeElectionSelected } from "./electionDuck";
 
 class SelectElection extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get('/elections/').then(result => {
-      this.props.dispatch(changeElectionList(result.data))
-    })
+    this.props.HTTPClient.get("/elections/").then(result => {
+      this.props.dispatch(changeElectionList(result.data));
+    });
   }
 
   getOptions(input, callback) {
     const election = this.props.list.objects.map(item => {
-      return { label: item.year, value: item.year }
-    })
-    return getOptionsCallback(input, callback, election)
+      return { label: item.year, value: item.year };
+    });
+    return getOptionsCallback(input, callback, election);
   }
 
   render() {
     if (!this.props.list) {
-      return null
+      return null;
     }
 
     return (
@@ -47,10 +47,11 @@ class SelectElection extends Component {
         placeholder="Escolha uma ou várias eleições..."
         loadOptions={this.getOptions.bind(this)}
         onChange={selected =>
-          this.props.dispatch(changeElectionSelected(selected))}
+          this.props.dispatch(changeElectionSelected(selected))
+        }
         value={this.props.selected}
       />
-    )
+    );
   }
 }
 
@@ -58,15 +59,15 @@ class SelectElection extends Component {
 const mapStateToProps = ({ election }) => {
   return {
     list: election.list,
-    selected: election.selected,
-  }
-}
+    selected: election.selected
+  };
+};
 
 SelectElection.propTypes = {
   dispatch: PropTypes.func,
   list: PropTypes.object,
   selected: PropTypes.array,
-  HTTPClient: PropTypes.object,
-}
+  HTTPClient: PropTypes.object
+};
 
-export default connect(mapStateToProps)(SelectElection)
+export default connect(mapStateToProps)(SelectElection);

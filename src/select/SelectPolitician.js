@@ -15,51 +15,60 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import debounce from 'es6-promise-debounce'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import debounce from "es6-promise-debounce";
 
-import Multiselect, { getOptionsCallback } from '../components/Multiselect'
+import Multiselect, { getOptionsCallback } from "../components/Multiselect";
 import {
   changePoliticianList,
   changePoliticianSelected,
-  fetchPolitician,
-} from './politicianDuck'
+  fetchPolitician
+} from "./politicianDuck";
 
 class SelectPolitician extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get('/politicians/search').then(result => {
-      this.props.dispatch(changePoliticianList(result.data))
-    })
+    this.props.HTTPClient.get("/politicians/search").then(result => {
+      this.props.dispatch(changePoliticianList(result.data));
+    });
   }
 
   getOptions(input, callback) {
     const politician = this.props.list.objects.map(item => {
-      return { label: item.name, value: item.name }
-    })
-    return getOptionsCallback(input, callback, politician)
+      return { label: item.name, value: item.name };
+    });
+    return getOptionsCallback(input, callback, politician);
+  }
+
+  handleUpdateInput() {
+    this.props.HTTPClient.get("/politicians/search").then(result => {
+      this.props.dispatch(changePoliticianList(result.data));
+    });
   }
 
   render() {
     if (!this.props.list) {
-      return null
+      return null;
     }
 
     return (
-      <Multiselect
-        label="Políticos"
-        placeholder="Escolha uma ou vários políticos..."
-        loadOptions={this.getOptions.bind(this)}
-        onChange={selected =>
-          this.props.dispatch(changePoliticianSelected(selected))}
-        onInputChange={debounce(
-          selected => this.props.dispatch(fetchPolitician(selected)),
-          500
-        )}
-        value={this.props.selected}
-      />
-    )
+      <div>
+        <Multiselect
+          label="Políticos"
+          placeholder="Escolha uma ou vários políticos..."
+          loadOptions={this.getOptions.bind(this)}
+          onChange={selected =>
+            this.props.dispatch(changePoliticianSelected(selected))
+          }
+          onInputChange={debounce(
+            selected => this.props.dispatch(fetchPolitician(selected)),
+            500
+          )}
+          value={this.props.selected}
+        />
+      </div>
+    );
   }
 }
 
@@ -67,15 +76,15 @@ class SelectPolitician extends Component {
 const mapStateToProps = ({ politician }) => {
   return {
     list: politician.list,
-    selected: politician.selected,
-  }
-}
+    selected: politician.selected
+  };
+};
 
 SelectPolitician.propTypes = {
   dispatch: PropTypes.func,
   list: PropTypes.object,
   selected: PropTypes.array,
-  HTTPClient: PropTypes.object,
-}
+  HTTPClient: PropTypes.object
+};
 
-export default connect(mapStateToProps)(SelectPolitician)
+export default connect(mapStateToProps)(SelectPolitician);

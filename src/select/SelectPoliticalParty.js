@@ -15,48 +15,51 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import Multiselect, { getOptionsCallback } from '../components/Multiselect'
+import Multiselect, { getOptionsCallback } from "../components/Multiselect";
 import {
   changePoliticalPartyList,
-  changePoliticalPartySelected,
-} from './politicalPartyDuck'
+  changePoliticalPartySelected
+} from "./politicalPartyDuck";
 
 class SelectPoliticalParty extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get('/political-parties/').then(result => {
-      this.props.dispatch(changePoliticalPartyList(result.data))
-    })
+    this.props.HTTPClient.get("/political-parties/").then(result => {
+      this.props.dispatch(changePoliticalPartyList(result.data));
+    });
   }
 
   getOptions(input, callback) {
     const politicalParty = this.props.list.objects.map(item => {
       return {
-        label: item.siglum + ' (' + item.name + ')',
-        value: item.siglum,
-      }
-    })
-    return getOptionsCallback(input, callback, politicalParty)
+        label: item.siglum + " (" + item.name + ")",
+        value: item.siglum
+      };
+    });
+    return getOptionsCallback(input, callback, politicalParty);
   }
 
   render() {
     if (!this.props.list) {
-      return null
+      return null;
     }
 
     return (
-      <Multiselect
-        label="Partidos"
-        placeholder="Escolha um ou vários partidos..."
-        loadOptions={this.getOptions.bind(this)}
-        onChange={selected =>
-          this.props.dispatch(changePoliticalPartySelected(selected))}
-        value={this.props.selected}
-      />
-    )
+      <div>
+        <Multiselect
+          label="Partidos"
+          placeholder="Escolha um ou vários partidos..."
+          loadOptions={this.getOptions.bind(this)}
+          onChange={selected =>
+            this.props.dispatch(changePoliticalPartySelected(selected))
+          }
+          value={this.props.selected}
+        />
+      </div>
+    );
   }
 }
 
@@ -64,15 +67,15 @@ class SelectPoliticalParty extends Component {
 const mapStateToProps = ({ politicalParty }) => {
   return {
     list: politicalParty.list,
-    selected: politicalParty.selected,
-  }
-}
+    selected: politicalParty.selected
+  };
+};
 
 SelectPoliticalParty.propTypes = {
   dispatch: PropTypes.func,
   list: PropTypes.object,
   selected: PropTypes.array,
-  HTTPClient: PropTypes.object,
-}
+  HTTPClient: PropTypes.object
+};
 
-export default connect(mapStateToProps)(SelectPoliticalParty)
+export default connect(mapStateToProps)(SelectPoliticalParty);

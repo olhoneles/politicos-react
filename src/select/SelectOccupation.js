@@ -15,35 +15,35 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import debounce from 'es6-promise-debounce'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import debounce from "es6-promise-debounce";
 
-import Multiselect, { getOptionsCallback } from '../components/Multiselect'
+import Multiselect, { getOptionsCallback } from "../components/Multiselect";
 import {
   changeOccupationList,
   changeOccupationSelected,
-  fetchOccupation,
-} from './occupationDuck'
+  fetchOccupation
+} from "./occupationDuck";
 
 class SelectOccupation extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get('/occupations/search').then(result => {
-      this.props.dispatch(changeOccupationList(result.data))
-    })
+    this.props.HTTPClient.get("/occupations/search").then(result => {
+      this.props.dispatch(changeOccupationList(result.data));
+    });
   }
 
   getOptions(input, callback) {
     const occupation = this.props.list.objects.map(item => {
-      return { label: item.name, value: item.slug }
-    })
-    return getOptionsCallback(input, callback, occupation)
+      return { label: item.name, value: item.slug };
+    });
+    return getOptionsCallback(input, callback, occupation);
   }
 
   render() {
     if (!this.props.list) {
-      return null
+      return null;
     }
 
     return (
@@ -52,14 +52,15 @@ class SelectOccupation extends Component {
         placeholder="Escolha uma ou mais profissões..."
         loadOptions={this.getOptions.bind(this)}
         onChange={selected =>
-          this.props.dispatch(changeOccupationSelected(selected))}
+          this.props.dispatch(changeOccupationSelected(selected))
+        }
         onInputChange={debounce(
           selected => this.props.dispatch(fetchOccupation(selected)),
           500
         )}
         value={this.props.selected}
       />
-    )
+    );
   }
 }
 
@@ -67,15 +68,15 @@ class SelectOccupation extends Component {
 const mapStateToProps = ({ occupation }) => {
   return {
     list: occupation.list,
-    selected: occupation.selected,
-  }
-}
+    selected: occupation.selected
+  };
+};
 
 SelectOccupation.propTypes = {
   dispatch: PropTypes.func,
   list: PropTypes.object,
   selected: PropTypes.array,
-  HTTPClient: PropTypes.object,
-}
+  HTTPClient: PropTypes.object
+};
 
-export default connect(mapStateToProps)(SelectOccupation)
+export default connect(mapStateToProps)(SelectOccupation);

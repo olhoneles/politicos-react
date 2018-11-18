@@ -15,55 +15,55 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import HTTPClient from '../HTTPClient'
+import HTTPClient from "../HTTPClient";
 
-export const CITY_LIST = 'CITY_LIST'
-export const CITY_SELECTED = 'CITY_SELECTED'
+export const CITY_LIST = "CITY_LIST";
+export const CITY_SELECTED = "CITY_SELECTED";
 
 // Action creators
 export const changeCityList = list => ({
   type: CITY_LIST,
-  list,
-})
+  list
+});
 
 export const changeCitySelected = selected => ({
   type: CITY_SELECTED,
-  selected,
-})
+  selected
+});
 
 // Side-effects / thunks
 
 export const fetchCity = selected => {
   return dispatch => {
-    const filter = selected != '' ? '?q=' + selected : ''
-    return HTTPClient.get('/cities/search/' + filter).then(response => {
-      dispatch(changeCityList(response.data))
-    })
-  }
-}
+    const filter = selected !== "" ? "?q=" + selected : "";
+    return HTTPClient.get("/cities/search/" + filter).then(response => {
+      dispatch(changeCityList(response.data));
+    });
+  };
+};
 
 // Reducer
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: 'candidacies__city__name__in',
-}
+  query: "candidacies__city__name__in"
+};
 
 const cityReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CITY_LIST:
       return {
         ...state,
-        list: action.list,
-      }
+        list: action.list
+      };
     case CITY_SELECTED:
       return {
         ...state,
-        selected: action.selected,
-      }
+        selected: action.selected
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default cityReducer
+export default cityReducer;

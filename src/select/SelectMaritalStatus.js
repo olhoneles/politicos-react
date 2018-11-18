@@ -15,34 +15,34 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import HTTPClient from '../HTTPClient'
-import Multiselect, { getOptionsCallback } from '../components/Multiselect'
+import HTTPClient from "../HTTPClient";
+import Multiselect, { getOptionsCallback } from "../components/Multiselect";
 import {
   changeMaritalStatusList,
-  changeMaritalStatusSelected,
-} from './maritalStatusDuck'
+  changeMaritalStatusSelected
+} from "./maritalStatusDuck";
 
 class SelectMaritalStatus extends Component {
   componentDidMount() {
-    HTTPClient.get('/marital-status/').then(result => {
-      this.props.dispatch(changeMaritalStatusList(result.data))
-    })
+    HTTPClient.get("/marital-status/").then(result => {
+      this.props.dispatch(changeMaritalStatusList(result.data));
+    });
   }
 
   getOptions(input, callback) {
     const maritalStatus = this.props.list.objects.map(item => {
-      return { label: item.name, value: item.slug }
-    })
-    return getOptionsCallback(input, callback, maritalStatus)
+      return { label: item.name, value: item.slug };
+    });
+    return getOptionsCallback(input, callback, maritalStatus);
   }
 
   render() {
     if (!this.props.list) {
-      return null
+      return null;
     }
 
     return (
@@ -51,10 +51,11 @@ class SelectMaritalStatus extends Component {
         placeholder="Escolha um estado civil..."
         loadOptions={this.getOptions.bind(this)}
         onChange={selected =>
-          this.props.dispatch(changeMaritalStatusSelected(selected))}
+          this.props.dispatch(changeMaritalStatusSelected(selected))
+        }
         value={this.props.selected}
       />
-    )
+    );
   }
 }
 
@@ -62,14 +63,14 @@ class SelectMaritalStatus extends Component {
 const mapStateToProps = ({ maritalStatus }) => {
   return {
     list: maritalStatus.list,
-    selected: maritalStatus.selected,
-  }
-}
+    selected: maritalStatus.selected
+  };
+};
 
 SelectMaritalStatus.propTypes = {
   dispatch: PropTypes.func,
   list: PropTypes.object,
-  selected: PropTypes.array,
-}
+  selected: PropTypes.array
+};
 
-export default connect(mapStateToProps)(SelectMaritalStatus)
+export default connect(mapStateToProps)(SelectMaritalStatus);

@@ -15,42 +15,42 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-export const STATE_LIST = 'STATE_LIST'
-export const STATE_SELECTED = 'STATE_SELECTED'
+export const STATE_LIST = "STATE_LIST";
+export const STATE_SELECTED = "STATE_SELECTED";
 
 // Action creators
 export const changeStateList = list => ({
   type: STATE_LIST,
-  list,
-})
+  list
+});
 
 export const changeStateSelected = selected => ({
   type: STATE_SELECTED,
-  selected,
-})
+  selected
+});
 
 // Reducer
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: 'candidacies__state__slug__in',
-}
+  query: "candidacies__state__slug__in"
+};
 
 const stateReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case STATE_LIST:
       return {
         ...state,
-        list: action.list,
-      }
+        list: action.list
+      };
     case STATE_SELECTED:
       return {
         ...state,
-        selected: action.selected,
-      }
+        selected: action.selected
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default stateReducer
+export default stateReducer;

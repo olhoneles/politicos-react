@@ -15,42 +15,42 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-export const POLITICAL_OFFICE_LIST = 'POLITICAL_OFFICE_LIST'
-export const POLITICAL_OFFICE_SELECTED = 'POLITICAL_OFFICE_SELECTED'
+export const POLITICAL_OFFICE_LIST = "POLITICAL_OFFICE_LIST";
+export const POLITICAL_OFFICE_SELECTED = "POLITICAL_OFFICE_SELECTED";
 
 // Action creators
 export const changePoliticalOfficeList = list => ({
   type: POLITICAL_OFFICE_LIST,
-  list,
-})
+  list
+});
 
 export const changePoliticalOfficeSelected = selected => ({
   type: POLITICAL_OFFICE_SELECTED,
-  selected,
-})
+  selected
+});
 
 // Reducer
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: 'candidacies__political_office__slug__in',
-}
+  query: "candidacies__political_office__slug__in"
+};
 
 const politicalOfficeReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case POLITICAL_OFFICE_LIST:
       return {
         ...state,
-        list: action.list,
-      }
+        list: action.list
+      };
     case POLITICAL_OFFICE_SELECTED:
       return {
         ...state,
-        selected: action.selected,
-      }
+        selected: action.selected
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default politicalOfficeReducer
+export default politicalOfficeReducer;

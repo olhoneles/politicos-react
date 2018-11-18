@@ -15,31 +15,31 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import Multiselect, { getOptionsCallback } from '../components/Multiselect'
-import { changeGenderList, changeGenderSelected } from './genderDuck'
+import Multiselect, { getOptionsCallback } from "../components/Multiselect";
+import { changeGenderList, changeGenderSelected } from "./genderDuck";
 
 class SelectGender extends Component {
   componentDidMount() {
     const options = [
-      { label: 'Masculino', value: 'M' },
-      { label: 'Feminino', value: 'F' },
-      { label: 'Não informado', value: 'N' },
-    ]
-    this.props.dispatch(changeGenderList(options))
+      { label: "Masculino", value: "M" },
+      { label: "Feminino", value: "F" },
+      { label: "Não informado", value: "N" }
+    ];
+    this.props.dispatch(changeGenderList(options));
   }
 
   getOptions(input, callback) {
-    const gender = this.props.list
-    return getOptionsCallback(input, callback, gender)
+    const gender = this.props.list;
+    return getOptionsCallback(input, callback, gender);
   }
 
   render() {
     if (!this.props.list) {
-      return null
+      return null;
     }
 
     return (
@@ -48,10 +48,11 @@ class SelectGender extends Component {
         placeholder="Escolha o sexo..."
         loadOptions={this.getOptions.bind(this)}
         onChange={selected =>
-          this.props.dispatch(changeGenderSelected(selected))}
+          this.props.dispatch(changeGenderSelected(selected))
+        }
         value={this.props.selected}
       />
-    )
+    );
   }
 }
 
@@ -59,14 +60,14 @@ class SelectGender extends Component {
 const mapStateToProps = ({ gender }) => {
   return {
     list: gender.list,
-    selected: gender.selected,
-  }
-}
+    selected: gender.selected
+  };
+};
 
 SelectGender.propTypes = {
   dispatch: PropTypes.func,
   list: PropTypes.array,
-  selected: PropTypes.array,
-}
+  selected: PropTypes.array
+};
 
-export default connect(mapStateToProps)(SelectGender)
+export default connect(mapStateToProps)(SelectGender);

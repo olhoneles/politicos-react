@@ -15,42 +15,42 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-export const EDUCATION_LIST = 'EDUCATION_LIST'
-export const EDUCATION_SELECTED = 'EDUCATION_SELECTED'
+export const EDUCATION_LIST = "EDUCATION_LIST";
+export const EDUCATION_SELECTED = "EDUCATION_SELECTED";
 
 // Action creators
 export const changeEducationList = list => ({
   type: EDUCATION_LIST,
-  list,
-})
+  list
+});
 
 export const changeEducationSelected = selected => ({
   type: EDUCATION_SELECTED,
-  selected,
-})
+  selected
+});
 
 // Reducer
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: 'education__name__in',
-}
+  query: "education__name__in"
+};
 
 const educationReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case EDUCATION_LIST:
       return {
         ...state,
-        list: action.list,
-      }
+        list: action.list
+      };
     case EDUCATION_SELECTED:
       return {
         ...state,
-        selected: action.selected,
-      }
+        selected: action.selected
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default educationReducer
+export default educationReducer;

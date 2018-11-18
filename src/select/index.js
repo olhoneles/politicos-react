@@ -15,17 +15,17 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import SelectCity from './SelectCity'
-import SelectEducation from './SelectEducation'
-import SelectElected from './SelectElected'
-import SelectElection from './SelectElection'
-import SelectGender from './SelectGender'
-import SelectMaritalStatus from './SelectMaritalStatus'
-import SelectOccupation from './SelectOccupation'
-import SelectPoliticalOffice from './SelectPoliticalOffice'
-import SelectPoliticalParty from './SelectPoliticalParty'
-import SelectPolitician from './SelectPolitician'
-import SelectState from './SelectState'
+import SelectCity from "./SelectCity";
+import SelectEducation from "./SelectEducation";
+import SelectElected from "./SelectElected";
+import SelectElection from "./SelectElection";
+import SelectGender from "./SelectGender";
+import SelectMaritalStatus from "./SelectMaritalStatus";
+import SelectOccupation from "./SelectOccupation";
+import SelectPoliticalOffice from "./SelectPoliticalOffice";
+import SelectPoliticalParty from "./SelectPoliticalParty";
+import SelectPolitician from "./SelectPolitician";
+import SelectState from "./SelectState";
 
 export {
   SelectCity,
@@ -38,5 +38,5 @@ export {
   SelectPoliticalOffice,
   SelectPoliticalParty,
   SelectPolitician,
-  SelectState,
-}
+  SelectState
+};

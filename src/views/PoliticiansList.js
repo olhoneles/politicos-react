@@ -15,54 +15,76 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import PoliticiansListItem from './PoliticiansListItem'
-import { changePoliticiansList } from '../select/politiciansDuck'
-import Loading from '../components/Loading'
+import { connect } from "react-redux";
+import { withStyles } from "@material-ui/core/styles";
+
+import { changePoliticiansList } from "../select/politiciansDuck";
+import Loading from "../components/Loading";
+import PoliticianDetail from "./PoliticianDetail";
+
+// FIXME: duplicate
+const drawerWidth = 400;
+
+const styles = theme => ({
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
+    marginRight: drawerWidth
+  },
+  toolbar: theme.mixins.toolbar
+});
 
 export class PoliticiansList extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get('/politicians/').then(politicians => {
-      this.props.dispatch(changePoliticiansList(politicians.data))
-    })
+    this.props.HTTPClient.get("/politicians/").then(politicians => {
+      this.props.dispatch(changePoliticiansList(politicians.data));
+    });
   }
 
   render() {
-    if (!this.props.data) {
-      return <Loading />
+    const { classes, data } = this.props;
+
+    if (!data) {
+      return (
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          <Loading />
+        </main>
+      );
     }
 
-    const politicianItems = this.props.data.map(politician => {
+    const politicianItems = data.map(politician => {
       return (
-        <PoliticiansListItem
-          onPoliticianSelect={this.props.onPoliticianSelect}
+        <li
+          style={{ paddingBottom: 24, listStyleType: "none" }}
           key={politician.id}
-          politician={politician}
-        />
-      )
-    })
+        >
+          <PoliticianDetail politician={politician} />
+        </li>
+      );
+    });
 
     return (
-      <ul className="col-lg-12 list-group politicians">{politicianItems}</ul>
-    )
-  }
-}
-
-/* istanbul ignore next */
-const mapStateToProps = ({ politicians }) => {
-  return {
-    data: politicians.objects,
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        <ul style={{ padding: 0, margin: 0 }}>{politicianItems}</ul>
+      </main>
+    );
   }
 }
 
 PoliticiansList.propTypes = {
-  data: PropTypes.array,
-  dispatch: PropTypes.func,
-  onPoliticianSelect: PropTypes.func,
-  HTTPClient: PropTypes.object,
-}
+  classes: PropTypes.object.isRequired
+};
 
-export default connect(mapStateToProps)(PoliticiansList)
+/* istanbul ignore next */
+const mapStateToProps = ({ politicians }) => {
+  return {
+    data: politicians.objects
+  };
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(PoliticiansList));

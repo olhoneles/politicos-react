@@ -15,55 +15,55 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import HTTPClient from '../HTTPClient'
+import HTTPClient from "../HTTPClient";
 
-export const OCCUPATION_LIST = 'OCCUPATION_LIST'
-export const OCCUPATION_SELECTED = 'OCCUPATION_SELECTED'
+export const OCCUPATION_LIST = "OCCUPATION_LIST";
+export const OCCUPATION_SELECTED = "OCCUPATION_SELECTED";
 
 // Action creators
 export const changeOccupationList = list => ({
   type: OCCUPATION_LIST,
-  list,
-})
+  list
+});
 
 export const changeOccupationSelected = selected => ({
   type: OCCUPATION_SELECTED,
-  selected,
-})
+  selected
+});
 
 // Side-effects / thunks
 
 export const fetchOccupation = selected => {
   return dispatch => {
-    const filter = selected != '' ? '?q=' + selected : ''
-    return HTTPClient.get('/occupations/search/' + filter).then(response => {
-      dispatch(changeOccupationList(response.data))
-    })
-  }
-}
+    const filter = selected !== "" ? "?q=" + selected : "";
+    return HTTPClient.get("/occupations/search/" + filter).then(response => {
+      dispatch(changeOccupationList(response.data));
+    });
+  };
+};
 
 // Reducer
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: 'occupation__slug__in',
-}
+  query: "occupation__slug__in"
+};
 
 const occupationReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case OCCUPATION_LIST:
       return {
         ...state,
-        list: action.list,
-      }
+        list: action.list
+      };
     case OCCUPATION_SELECTED:
       return {
         ...state,
-        selected: action.selected,
-      }
+        selected: action.selected
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default occupationReducer
+export default occupationReducer;

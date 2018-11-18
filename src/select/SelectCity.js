@@ -15,31 +15,31 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import debounce from 'es6-promise-debounce'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import debounce from "es6-promise-debounce";
 
-import Multiselect, { getOptionsCallback } from '../components/Multiselect'
-import { changeCityList, changeCitySelected, fetchCity } from './cityDuck'
+import Multiselect, { getOptionsCallback } from "../components/Multiselect";
+import { changeCityList, changeCitySelected, fetchCity } from "./cityDuck";
 
 class SelectCity extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get('/cities/search').then(result => {
-      this.props.dispatch(changeCityList(result.data))
-    })
+    this.props.HTTPClient.get("/cities/search").then(result => {
+      this.props.dispatch(changeCityList(result.data));
+    });
   }
 
   getOptions(input, callback) {
     const city = this.props.list.objects.map(item => {
-      return { label: item.name, value: item.name }
-    })
-    return getOptionsCallback(input, callback, city)
+      return { label: item.name, value: item.name };
+    });
+    return getOptionsCallback(input, callback, city);
   }
 
   render() {
     if (!this.props.list) {
-      return null
+      return null;
     }
 
     return (
@@ -54,7 +54,7 @@ class SelectCity extends Component {
         )}
         value={this.props.selected}
       />
-    )
+    );
   }
 }
 
@@ -62,15 +62,15 @@ class SelectCity extends Component {
 const mapStateToProps = ({ city }) => {
   return {
     list: city.list,
-    selected: city.selected,
-  }
-}
+    selected: city.selected
+  };
+};
 
 SelectCity.propTypes = {
   dispatch: PropTypes.func,
   list: PropTypes.object,
   selected: PropTypes.array,
-  HTTPClient: PropTypes.object,
-}
+  HTTPClient: PropTypes.object
+};
 
-export default connect(mapStateToProps)(SelectCity)
+export default connect(mapStateToProps)(SelectCity);

@@ -15,13 +15,20 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React from 'react'
+import React from "react";
+
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Loading = () => (
-  <div>
-    <span className="glyphicon glyphicon-refresh glyphicon-refresh-animate" />
-    <span>Loading...</span>
-  </div>
-)
+  <List>
+    <ListItem>
+      <CircularProgress />
+      <ListItemText inset primary="Loading..." />
+    </ListItem>
+  </List>
+);
 
-export default Loading
+export default Loading;

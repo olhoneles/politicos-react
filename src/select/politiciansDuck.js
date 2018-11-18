@@ -15,21 +15,21 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-export const POLITICIANS_CHANGE = 'POLITICIANS_CHANGE'
-export const POLITICIANS_RESET = 'POLITICIANS_RESET'
+export const POLITICIANS_CHANGE = "POLITICIANS_CHANGE";
+export const POLITICIANS_RESET = "POLITICIANS_RESET";
 
 // Action creators
 export const changePoliticiansList = politicians => ({
   type: POLITICIANS_CHANGE,
-  politicians,
-})
+  politicians
+});
 
 export const resetPoliticiansList = () => ({
-  type: POLITICIANS_RESET,
-})
+  type: POLITICIANS_RESET
+});
 
 // Reducer
-const INITIAL_STATE = {}
+const INITIAL_STATE = {};
 
 const listPoliticiansReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -37,17 +37,17 @@ const listPoliticiansReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         objects: action.politicians.objects,
-        meta: action.politicians.meta,
-      }
+        meta: action.politicians.meta
+      };
     case POLITICIANS_RESET:
       return {
         ...state,
         meta: null,
-        objects: null,
-      }
+        objects: null
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default listPoliticiansReducer
+export default listPoliticiansReducer;
