@@ -1,13 +1,13 @@
 {
-  "main.css": "/static/css/main.b2a35f76.chunk.css",
-  "main.js": "/static/js/main.fbb138af.chunk.js",
-  "main.js.map": "/static/js/main.fbb138af.chunk.js.map",
-  "static/js/1.28e36c13.chunk.js": "/static/js/1.28e36c13.chunk.js",
-  "static/js/1.28e36c13.chunk.js.map": "/static/js/1.28e36c13.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/css/main.b2a35f76.chunk.css.map": "/static/css/main.b2a35f76.chunk.css.map",
-  "index.html": "/index.html",
-  "precache-manifest.6e64d2d759898d69d1e8788cefe91ebe.js": "/precache-manifest.6e64d2d759898d69d1e8788cefe91ebe.js",
-  "service-worker.js": "/service-worker.js"
+  "main.css": "/politicos-react/static/css/main.b2a35f76.chunk.css",
+  "main.js": "/politicos-react/static/js/main.e5d458e9.chunk.js",
+  "main.js.map": "/politicos-react/static/js/main.e5d458e9.chunk.js.map",
+  "static/js/1.28e36c13.chunk.js": "/politicos-react/static/js/1.28e36c13.chunk.js",
+  "static/js/1.28e36c13.chunk.js.map": "/politicos-react/static/js/1.28e36c13.chunk.js.map",
+  "runtime~main.js": "/politicos-react/static/js/runtime~main.38365d14.js",
+  "runtime~main.js.map": "/politicos-react/static/js/runtime~main.38365d14.js.map",
+  "static/css/main.b2a35f76.chunk.css.map": "/politicos-react/static/css/main.b2a35f76.chunk.css.map",
+  "index.html": "/politicos-react/index.html",
+  "precache-manifest.3143dd9b0b9119ddcfcffbd238b7846a.js": "/politicos-react/precache-manifest.3143dd9b0b9119ddcfcffbd238b7846a.js",
+  "service-worker.js": "/politicos-react/service-worker.js"
 }
