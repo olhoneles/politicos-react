@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/politicos-react/static/css/main.b2a35f76.chunk.css"
   },
   {
-    "revision": "864cfedbc5e87e46613eb32279656932",
+    "revision": "6f0cde3f98976ce931c1b69ec603febd",
     "url": "/politicos-react/index.html"
   }
 ];
