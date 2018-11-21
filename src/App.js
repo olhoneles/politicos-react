@@ -132,7 +132,7 @@ class App extends React.Component {
               <Hidden smUp implementation="css">
                 <Drawer
                   variant="temporary"
-                  anchor="right"
+                  anchor="left"
                   open={this.state.mobileOpen}
                   onClose={this.handleDrawerToggle}
                   classes={{
