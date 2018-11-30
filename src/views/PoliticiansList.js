@@ -39,7 +39,7 @@ const styles = theme => ({
 
 export class PoliticiansList extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get("/politicians/").then(politicians => {
+    this.props.HTTPClient.get("/candidacies/").then(politicians => {
       this.props.dispatch(changePoliticiansList(politicians.data));
     });
   }
@@ -56,16 +56,18 @@ export class PoliticiansList extends Component {
       );
     }
 
-    const politicianItems = data.map(politician => {
-      return (
-        <li
-          style={{ paddingBottom: 24, listStyleType: "none" }}
-          key={politician.id}
-        >
-          <PoliticianDetail politician={politician} />
-        </li>
-      );
-    });
+    const politicianItems =
+      data &&
+      data.map(politician => {
+        return (
+          <li
+            style={{ paddingBottom: 24, listStyleType: "none" }}
+            key={politician.id}
+          >
+            <PoliticianDetail politician={politician} />
+          </li>
+        );
+      });
 
     return (
       <main className={classes.content}>

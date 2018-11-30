@@ -33,7 +33,7 @@ export const changeElectedSelected = selected => ({
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: "candidacies__elected__in"
+  query: "cd_sit_tot_turno"
 };
 
 const electedReducer = (state = INITIAL_STATE, action) => {

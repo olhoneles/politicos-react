@@ -24,15 +24,17 @@ import { changeEducationList, changeEducationSelected } from "./educationDuck";
 
 class SelectEducation extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get("/educations/").then(result => {
+    this.props.HTTPClient.get("/educations/suggest/").then(result => {
       this.props.dispatch(changeEducationList(result.data));
     });
   }
 
   getOptions(input, callback) {
-    const education = this.props.list.objects.map(item => {
-      return { label: item.name, value: item.name };
-    });
+    const education =
+      this.props.list &&
+      this.props.list.map(item => {
+        return { label: item.ds_grau_instrucao, value: item.cd_grau_instrucao };
+      });
     return getOptionsCallback(input, callback, education);
   }
 

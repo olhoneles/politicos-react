@@ -40,37 +40,22 @@ class PoliticianDetail extends Component {
 
   getPoliticianName() {
     if (
-      this.politician.alternative_names &&
-      this.politician.alternative_names[0] &&
-      this.politician.name !== this.politician.alternative_names[0].name
+      this.politician.nm_urna_candidato &&
+      this.politician.nm_candidato !== this.politician.nm_urna_candidato
     ) {
-      return `${this.politician.alternative_names[0].name} (${
-        this.politician.name
+      return `${this.politician.nm_urna_candidato} (${
+        this.politician.nm_candidato
       })`;
     }
-    return this.politician.name;
-  }
-
-  getGender() {
-    if (this.politician.gender === "M") {
-      return "Masculino";
-    } else if (this.politician.gender === "F") {
-      return "Feminino";
-    } else {
-      return "Não informado";
-    }
+    return this.politician.nm_urna_candidato;
   }
 
   getPoliticalParties() {
-    return this.politician.political_parties
-      .map(item => {
-        return item.political_party.siglum;
-      })
-      .join(", ");
+    return `${this.politician.sg_partido} (${this.politician.nm_partido})`;
   }
 
   getPicture() {
-    if (!this.politician.picture) {
+    if (!this.politician.foto_url) {
       return (
         <div>
           <span className="glyphicon glyphicon-user" aria-hidden="true" />
@@ -81,21 +66,11 @@ class PoliticianDetail extends Component {
       return (
         <img
           alt={`Foto: ${this.getPoliticianName()}`}
-          src={this.politician.picture}
+          src={this.politician.foto_url}
           className="politician-picture"
         />
       );
     }
-  }
-
-  getAlternativeNames() {
-    return this.politician.alternative_names.map(item => {
-      return item.name;
-    });
-  }
-
-  getEthnicity() {
-    return this.politician.ethnicity ? this.politician.ethnicity.name : "";
   }
 
   getPlaceOfBirth() {
@@ -114,18 +89,17 @@ class PoliticianDetail extends Component {
         <div style={{ display: "flex", width: "100%" }}>
           <div style={{ flexGrow: 1, width: "33%" }}>{this.getPicture()}</div>
           <div style={{ flexGrow: 1, width: "33%" }}>
-            <p>Sexo: {this.getGender()}</p>
+            <p>Sexo: {this.politician.ds_genero}</p>
             <p>Partido: {this.getPoliticalParties()}</p>
-            <p>Estado civil: {this.politician.marital_status.name}</p>
-            <p>Ocupação: {this.politician.occupation.name}</p>
-            <p>Escolaridade: {this.politician.education.name}</p>
-            <p>Data de nascimento: {this.politician.date_of_birth}</p>
-            <p>Nacionalidade: {this.politician.nationality.name}</p>
-            <p>Naturalidade: {this.getPlaceOfBirth()}</p>
-            <p>Nomes Alternativos: {this.getAlternativeNames()}</p>
-            <p>Cor/Raça: {this.getEthnicity()}</p>
-            <p>Email: {this.politician.email}</p>
-            <p>Website: {this.politician.website}</p>
+            <p>Estado civil: {this.politician.ds_estado_civil}</p>
+            <p>Ocupação: {this.politician.ds_ocupacao}</p>
+            <p>Escolaridade: {this.politician.ds_grau_instrucao}</p>
+            <p>Data de nascimento: {this.politician.dt_nascimento}</p>
+            <p>Nacionalidade: {this.politician.ds_nacionalidade}</p>
+            <p>Naturalidade: {this.politician.nm_municipio_nascimento}</p>
+            <p>Nomes Alternativos: {this.politician.nm_urna_candidato}</p>
+            <p>Cor/Raça: {this.politician.ds_cor_raca}</p>
+            <p>Email: {this.politician.nm_email}</p>
           </div>
           <div style={{ flexGrow: 1, width: "33%" }}>
             <PoliticianCandidacies data={this.politician.candidacies} />

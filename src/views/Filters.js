@@ -70,7 +70,7 @@ export class Filters extends Component {
 
     this.props.dispatch(resetPoliticiansList());
 
-    this.props.HTTPClient.get("/politicians?" + queryString.toString()).then(
+    this.props.HTTPClient.get("/candidacies/?" + queryString.toString()).then(
       result => {
         this.props.dispatch(changePoliticiansList(result.data));
       }

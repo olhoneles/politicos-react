@@ -35,8 +35,8 @@ export const changePoliticianSelected = selected => ({
 
 export const fetchPolitician = selected => {
   return dispatch => {
-    const filter = selected !== "" ? "?q=" + selected : "";
-    return HTTPClient.get("/politicians/search/" + filter).then(response => {
+    const filter = selected !== "" ? `?q=${selected}` : "";
+    return HTTPClient.get(`/politicians/suggest/${filter}`).then(response => {
       dispatch(changePoliticianList(response.data));
     });
   };
@@ -46,7 +46,7 @@ export const fetchPolitician = selected => {
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: "name__in"
+  query: "nr_cpf_candidato"
 };
 
 const politicianReducer = (state = INITIAL_STATE, action) => {

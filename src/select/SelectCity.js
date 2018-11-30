@@ -25,15 +25,17 @@ import { changeCityList, changeCitySelected, fetchCity } from "./cityDuck";
 
 class SelectCity extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get("/cities/search").then(result => {
+    this.props.HTTPClient.get("/cities/suggest/").then(result => {
       this.props.dispatch(changeCityList(result.data));
     });
   }
 
   getOptions(input, callback) {
-    const city = this.props.list.objects.map(item => {
-      return { label: item.name, value: item.name };
-    });
+    const city =
+      this.props.list &&
+      this.props.list.map(item => {
+        return { label: item.nm_ue, value: item.nm_ue };
+      });
     return getOptionsCallback(input, callback, city);
   }
 

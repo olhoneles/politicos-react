@@ -29,20 +29,22 @@ import {
 
 class SelectPolitician extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get("/politicians/search").then(result => {
+    this.props.HTTPClient.get("/politicians/suggest/").then(result => {
       this.props.dispatch(changePoliticianList(result.data));
     });
   }
 
   getOptions(input, callback) {
-    const politician = this.props.list.objects.map(item => {
-      return { label: item.name, value: item.name };
-    });
+    const politician =
+      this.props.list &&
+      this.props.list.map(item => {
+        return { label: item.nm_candidato, value: item.nr_cpf_candidato };
+      });
     return getOptionsCallback(input, callback, politician);
   }
 
   handleUpdateInput() {
-    this.props.HTTPClient.get("/politicians/search").then(result => {
+    this.props.HTTPClient.get("/politicians/suggest/").then(result => {
       this.props.dispatch(changePoliticianList(result.data));
     });
   }

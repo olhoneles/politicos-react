@@ -33,7 +33,7 @@ export const changeMaritalStatusSelected = selected => ({
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: "marital_status__slug__in"
+  query: "cd_estado_civil"
 };
 
 const maritalStatusReducer = (state = INITIAL_STATE, action) => {

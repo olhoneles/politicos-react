@@ -33,7 +33,7 @@ export const changeEducationSelected = selected => ({
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: "education__name__in"
+  query: "cd_grau_instrucao"
 };
 
 const educationReducer = (state = INITIAL_STATE, action) => {

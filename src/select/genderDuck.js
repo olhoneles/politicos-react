@@ -33,7 +33,7 @@ export const changeGenderSelected = selected => ({
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: "gender__in"
+  query: "cd_genero"
 };
 
 const genderReducer = (state = INITIAL_STATE, action) => {

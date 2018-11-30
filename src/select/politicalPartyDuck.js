@@ -33,7 +33,7 @@ export const changePoliticalPartySelected = selected => ({
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: "political_parties__political_party__siglum__in"
+  query: "sg_partido"
 };
 
 const politicalPartyReducer = (state = INITIAL_STATE, action) => {

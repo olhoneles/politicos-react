@@ -22,9 +22,7 @@ import _ from "lodash";
 
 const PoliticianCandidacies = props => {
   // FIXME: remove lodash
-  const candidacies = _.groupBy(props.data, x => {
-    return new Date(x.election_round.date).getFullYear();
-  });
+  const candidacies = _.groupBy(props.data, x => x.ano_eleicao);
   const candidacyYears = Object.keys(candidacies).map(year => {
     return <CandidacyYear key={year} year={year} candidacies={candidacies} />;
   });
@@ -32,7 +30,7 @@ const PoliticianCandidacies = props => {
   return (
     <div>
       <h3 className="panel-title">Candidaturas</h3>
-      <div className="panel-body">{candidacyYears}</div>
+      {<div className="panel-body">{candidacyYears}</div>}
     </div>
   );
 };
@@ -62,7 +60,7 @@ const CandidacyList = ({ candidacies }) => {
     return <CandidacyListItem key={candidacy.id} candidacy={candidacy} />;
   });
 
-  return <dd>{candidacyItems}</dd>;
+  return <React.Fragment>{candidacyItems}</React.Fragment>;
 };
 
 CandidacyList.propTypes = {
@@ -70,21 +68,26 @@ CandidacyList.propTypes = {
 };
 
 const CandidacyListItem = ({ candidacy }) => {
-  const status = candidacy.elected ? "Eleito" : "Não eleito";
-  const round_number = candidacy.election_round.round_number;
+  const status =
+    candidacy.ds_sit_tot_turno === "ELEITO" ? "Eleito" : "Não eleito";
+  const round_number = candidacy.nr_turno;
 
   let info = "";
-  if (candidacy.city && candidacy.state) {
-    info = "em " + candidacy.city.name + "/" + candidacy.state.siglum;
-  } else if (candidacy.state) {
-    info = "em " + candidacy.state.name;
+  if (candidacy.nm_ue && candidacy.sg_uf) {
+    info = `em ${candidacy.nm_ue}/${candidacy.sg_uf}`;
+  } else if (candidacy.sg_uf) {
+    info = `em ${candidacy.sg_uf}`;
   }
 
   return (
-    <div>
+    <dd
+      style={{
+        marginBottom: 10
+      }}
+    >
       {status} no {round_number}
-      &deg; turno para {candidacy.political_office.name} {info}
-    </div>
+      &deg; turno para {candidacy.ds_cargo} {info}
+    </dd>
   );
 };
 

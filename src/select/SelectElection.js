@@ -24,15 +24,17 @@ import { changeElectionList, changeElectionSelected } from "./electionDuck";
 
 class SelectElection extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get("/elections/").then(result => {
+    this.props.HTTPClient.get("/elections/suggest/").then(result => {
       this.props.dispatch(changeElectionList(result.data));
     });
   }
 
   getOptions(input, callback) {
-    const election = this.props.list.objects.map(item => {
-      return { label: item.year, value: item.year };
-    });
+    const election =
+      this.props.list &&
+      this.props.list.map(item => {
+        return { label: item.ano_eleicao, value: item.ano_eleicao };
+      });
     return getOptionsCallback(input, callback, election);
   }
 

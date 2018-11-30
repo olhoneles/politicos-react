@@ -35,8 +35,8 @@ export const changeCitySelected = selected => ({
 
 export const fetchCity = selected => {
   return dispatch => {
-    const filter = selected !== "" ? "?q=" + selected : "";
-    return HTTPClient.get("/cities/search/" + filter).then(response => {
+    const filter = selected !== "" ? `?q=${selected}` : "";
+    return HTTPClient.get("/cities/suggest/" + filter).then(response => {
       dispatch(changeCityList(response.data));
     });
   };
@@ -46,7 +46,7 @@ export const fetchCity = selected => {
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: "candidacies__city__name__in"
+  query: "nm_ue"
 };
 
 const cityReducer = (state = INITIAL_STATE, action) => {

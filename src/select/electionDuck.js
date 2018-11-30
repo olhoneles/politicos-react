@@ -33,7 +33,7 @@ export const changeElectionSelected = selected => ({
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: "candidacies__election_round__election__year__in"
+  query: "ano_eleicao"
 };
 
 const educationReducer = (state = INITIAL_STATE, action) => {

@@ -29,15 +29,17 @@ import {
 
 class SelectOccupation extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get("/occupations/search").then(result => {
+    this.props.HTTPClient.get("/occupations/suggest/").then(result => {
       this.props.dispatch(changeOccupationList(result.data));
     });
   }
 
   getOptions(input, callback) {
-    const occupation = this.props.list.objects.map(item => {
-      return { label: item.name, value: item.slug };
-    });
+    const occupation =
+      this.props.list &&
+      this.props.list.map(item => {
+        return { label: item.ds_ocupacao, value: item.cd_ocupacao };
+      });
     return getOptionsCallback(input, callback, occupation);
   }
 

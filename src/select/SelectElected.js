@@ -24,15 +24,17 @@ import { changeElectedList, changeElectedSelected } from "./electedDuck";
 
 class SelectElected extends Component {
   componentDidMount() {
-    const elected = [
-      { label: "Eleito", value: 1 },
-      { label: "Não Eleito", value: 0 }
-    ];
-    this.props.dispatch(changeElectedList(elected));
+    this.props.HTTPClient.get("/candidacies-status/suggest/").then(result => {
+      this.props.dispatch(changeElectedList(result.data));
+    });
   }
 
   getOptions(input, callback) {
-    const elected = this.props.list;
+    const elected =
+      this.props.list &&
+      this.props.list.map(item => {
+        return { label: item.ds_sit_tot_turno, value: item.cd_sit_tot_turno };
+      });
     return getOptionsCallback(input, callback, elected);
   }
 
@@ -43,7 +45,7 @@ class SelectElected extends Component {
 
     return (
       <Multiselect
-        label="Eleito"
+        label="Status da candidatura"
         placeholder="Filtre quem foi eleito ou não..."
         loadOptions={this.getOptions.bind(this)}
         onChange={selected =>

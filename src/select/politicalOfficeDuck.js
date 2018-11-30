@@ -33,7 +33,7 @@ export const changePoliticalOfficeSelected = selected => ({
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: "candidacies__political_office__slug__in"
+  query: "cd_cargo"
 };
 
 const politicalOfficeReducer = (state = INITIAL_STATE, action) => {

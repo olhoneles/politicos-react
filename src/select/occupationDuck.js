@@ -36,7 +36,7 @@ export const changeOccupationSelected = selected => ({
 export const fetchOccupation = selected => {
   return dispatch => {
     const filter = selected !== "" ? "?q=" + selected : "";
-    return HTTPClient.get("/occupations/search/" + filter).then(response => {
+    return HTTPClient.get("/occupations/suggest/" + filter).then(response => {
       dispatch(changeOccupationList(response.data));
     });
   };
@@ -46,7 +46,7 @@ export const fetchOccupation = selected => {
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: "occupation__slug__in"
+  query: "cd_ocupacao"
 };
 
 const occupationReducer = (state = INITIAL_STATE, action) => {

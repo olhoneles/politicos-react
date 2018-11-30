@@ -28,15 +28,17 @@ import {
 
 class SelectMaritalStatus extends Component {
   componentDidMount() {
-    HTTPClient.get("/marital-status/").then(result => {
+    HTTPClient.get("/marital-status/suggest/").then(result => {
       this.props.dispatch(changeMaritalStatusList(result.data));
     });
   }
 
   getOptions(input, callback) {
-    const maritalStatus = this.props.list.objects.map(item => {
-      return { label: item.name, value: item.slug };
-    });
+    const maritalStatus =
+      this.props.list &&
+      this.props.list.map(item => {
+        return { label: item.ds_estado_civil, value: item.cd_estado_civil };
+      });
     return getOptionsCallback(input, callback, maritalStatus);
   }
 

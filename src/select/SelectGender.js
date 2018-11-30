@@ -24,16 +24,17 @@ import { changeGenderList, changeGenderSelected } from "./genderDuck";
 
 class SelectGender extends Component {
   componentDidMount() {
-    const options = [
-      { label: "Masculino", value: "M" },
-      { label: "Feminino", value: "F" },
-      { label: "Não informado", value: "N" }
-    ];
-    this.props.dispatch(changeGenderList(options));
+    this.props.HTTPClient.get("/gender/suggest/").then(result => {
+      this.props.dispatch(changeGenderList(result.data));
+    });
   }
 
   getOptions(input, callback) {
-    const gender = this.props.list;
+    const gender =
+      this.props.list &&
+      this.props.list.map(item => {
+        return { label: item.ds_genero, value: item.cd_genero };
+      });
     return getOptionsCallback(input, callback, gender);
   }
 

@@ -33,7 +33,7 @@ export const changeStateSelected = selected => ({
 const INITIAL_STATE = {
   list: null,
   selected: null,
-  query: "candidacies__state__slug__in"
+  query: "sg_uf"
 };
 
 const stateReducer = (state = INITIAL_STATE, action) => {

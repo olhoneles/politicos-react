@@ -24,15 +24,17 @@ import { changeStateList, changeStateSelected } from "./stateDuck";
 
 class SelectState extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get("/states/").then(result => {
+    this.props.HTTPClient.get("/states/suggest/").then(result => {
       this.props.dispatch(changeStateList(result.data));
     });
   }
 
   getOptions(input, callback) {
-    const state = this.props.list.objects.map(item => {
-      return { label: item.name, value: item.slug };
-    });
+    const state =
+      this.props.list &&
+      this.props.list.map(item => {
+        return { label: item.sg_uf, value: item.sg_uf };
+      });
     return getOptionsCallback(input, callback, state);
   }
 

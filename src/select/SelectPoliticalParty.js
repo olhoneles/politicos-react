@@ -27,18 +27,20 @@ import {
 
 class SelectPoliticalParty extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get("/political-parties/").then(result => {
+    this.props.HTTPClient.get("/political-parties/suggest/").then(result => {
       this.props.dispatch(changePoliticalPartyList(result.data));
     });
   }
 
   getOptions(input, callback) {
-    const politicalParty = this.props.list.objects.map(item => {
-      return {
-        label: item.siglum + " (" + item.name + ")",
-        value: item.siglum
-      };
-    });
+    const politicalParty =
+      this.props.list &&
+      this.props.list.map(item => {
+        return {
+          label: item.sg_partido + " (" + item.nm_partido + ")",
+          value: item.sg_partido
+        };
+      });
     return getOptionsCallback(input, callback, politicalParty);
   }
 

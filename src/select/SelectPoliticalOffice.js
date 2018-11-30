@@ -27,15 +27,17 @@ import {
 
 class SelectPoliticalOffice extends Component {
   componentDidMount() {
-    this.props.HTTPClient.get("/political-offices/").then(result => {
+    this.props.HTTPClient.get("/political-offices/suggest/").then(result => {
       this.props.dispatch(changePoliticalOfficeList(result.data));
     });
   }
 
   getOptions(input, callback) {
-    const politicalOffice = this.props.list.objects.map(item => {
-      return { label: item.name, value: item.slug };
-    });
+    const politicalOffice =
+      this.props.list &&
+      this.props.list.map(item => {
+        return { label: item.ds_cargo, value: item.cd_cargo };
+      });
     return getOptionsCallback(input, callback, politicalOffice);
   }
 
